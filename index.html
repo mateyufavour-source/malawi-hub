@@ -3,581 +3,414 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#07110e">
-<title>MALAWI HUB - Quiz & Learn</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071b36">
+<title>MALAWI HUB | Learn & Win</title>
 <style>
-:root{
---bg:#07110e;--panel:#12221a;--green:#00d084;
---gold:#ffd166;--text:#fff;--muted:#a9b9af;
-}
+:root{--bg:#071b36;--panel:#102a4c;--gold:#ffd166;--green:#00d084;--white:#f5f8ff;--muted:#bdcbe0;--red:#ff6b6b}
 *{box-sizing:border-box}
-body{
-margin:0;background:var(--bg);color:var(--text);
-font-family:Arial,sans-serif;line-height:1.5
-}
-header{
-padding:16px;background:#0d1b14;
-border-bottom:1px solid #294438
-}
-.nav{
-max-width:950px;margin:auto;display:flex;
-align-items:center;justify-content:space-between;gap:10px
-}
-.logo{font-size:21px;font-weight:900}
-.logo span{color:var(--green)}
-main{max-width:950px;margin:auto;padding:16px}
-.hero{
-padding:25px 20px;border-radius:18px;
-background:linear-gradient(135deg,#12452d,#10231a,#44371b);
-border:1px solid #315744;margin-bottom:16px
-}
-.hero h1{font-size:clamp(30px,7vw,45px);line-height:1.15}
-.tag{color:var(--gold);font-weight:bold;font-size:13px}
-.card{
-background:var(--panel);border:1px solid #294438;
-border-radius:15px;padding:17px;margin-bottom:15px
-}
-.grid{
-display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-gap:12px
-}
-.stat{font-size:27px;color:var(--gold);font-weight:900}
-.muted{color:var(--muted);font-size:14px}
-button,input,select{font:inherit}
-button{
-padding:12px 15px;border:0;border-radius:9px;
-background:var(--green);color:#06140d;
-font-weight:bold;cursor:pointer;margin:4px 3px 4px 0
-}
-button.secondary{background:#293c31;color:white}
-button:disabled{opacity:.5}
-input,select{
-width:100%;padding:12px;margin:8px 0 14px;
-border:1px solid #355044;border-radius:9px;
-background:#08140f;color:white
-}
-label{display:block;color:#d5e3da;font-size:14px}
-.hidden{display:none!important}
-.question{font-size:20px;font-weight:bold;margin:18px 0}
-.option{
-display:block;width:100%;text-align:left;
-background:#20352a;color:white;border:1px solid #355044;
-margin:8px 0
-}
-.option.correct{background:#145a37}
-.option.wrong{background:#642c2c}
-#feedback{font-weight:bold;margin:12px 0}
-.prize-row{
-display:flex;justify-content:space-between;gap:10px;
-padding:10px 0;border-bottom:1px solid #294438
-}
-.gold{color:var(--gold);font-weight:bold}
-table{width:100%;border-collapse:collapse}
-th,td{
-padding:10px 6px;text-align:left;
-border-bottom:1px solid #294438
-}
-th{color:var(--gold)}
-.notice{
-padding:12px;border-left:3px solid var(--gold);
-background:#20291e;font-size:13px
-}
-footer{text-align:center;color:var(--muted);padding:25px 10px}
-@media(max-width:550px){
-.grid{grid-template-columns:1fr}
-main{padding:11px}
-.hero{padding:20px 15px}
-}
+body{margin:0;background:linear-gradient(160deg,#06152b,#0b2d52);color:var(--white);font-family:Arial,sans-serif;line-height:1.5}
+header{padding:16px;background:#051328;position:sticky;top:0;z-index:5;border-bottom:1px solid #244668}
+.nav{max-width:1000px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-size:22px;font-weight:900;color:var(--gold)}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav button{background:transparent;color:white;border:1px solid #355475;padding:8px;border-radius:9px}
+.wrap{max-width:1000px;margin:auto;padding:18px 14px 40px}
+.hero,.panel,.stat{background:linear-gradient(145deg,#102a4c,#0b2341);border:1px solid #284c70;border-radius:18px;padding:22px;margin:14px 0}
+.hero{text-align:center;padding:32px 18px}
+.hero h1{font-size:clamp(30px,7vw,48px);line-height:1.1;color:var(--gold)}
+h2{margin-top:0}
+p,.small{color:var(--muted)}
+.btn{border:0;border-radius:11px;padding:12px 16px;background:var(--gold);color:#15223a;font-weight:bold;cursor:pointer;display:inline-block;margin:4px;text-decoration:none}
+.btn.secondary{background:#244a70;color:white}
+.btn:disabled{opacity:.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.stat{margin:0;background:#0a1c33}
+.stat strong{display:block;font-size:24px;color:var(--gold)}
+.page{display:none}
+.page.active{display:block}
+.field{width:100%;padding:12px;margin:6px 0 12px;border-radius:9px;border:1px solid #456687;background:#06172c;color:white;font-size:16px}
+.question{font-size:21px;font-weight:bold;margin:14px 0}
+.option{display:block;width:100%;text-align:left;margin:9px 0;padding:13px;border:1px solid #3b5f82;border-radius:11px;background:#102a4c;color:white;font-size:16px;cursor:pointer}
+.option.correct{border-color:var(--green);background:#07523f}
+.option.wrong{border-color:var(--red);background:#602c3a}
+.timer-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.timer{font-size:22px;font-weight:900;color:var(--gold);background:#07172b;border:1px solid #375a7d;border-radius:10px;padding:7px 12px}
+.timer.low{color:var(--red)}
+.bar{height:8px;background:#28435e;border-radius:99px;overflow:hidden;margin:12px 0}
+.bar span{height:100%;display:block;background:var(--green);width:100%;transition:width .3s}
+#feedback{min-height:28px;font-weight:bold}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:280px}
+th,td{text-align:left;padding:10px;border-bottom:1px solid #2d4c6a}
+th,.prize{color:var(--gold)}
+.notice{border-left:4px solid var(--gold);padding:10px 14px;background:#091b30;border-radius:7px;color:var(--muted)}
+footer{text-align:center;padding:25px;color:var(--muted);border-top:1px solid #254361}
 </style>
 </head>
 <body>
 <header>
 <div class="nav">
-<div class="logo">MALAWI <span>HUB 🇲🇼</span></div>
-<button class="secondary" onclick="showPage('home')">Home</button>
+<div class="brand">🇲🇼 MALAWI HUB</div>
+<nav>
+<button onclick="showPage('home')">Home</button>
+<button onclick="startQuiz()">Play Quiz</button>
+<button onclick="showPage('prizes')">Prizes</button>
+<button onclick="showPage('leaderboard')">Leaderboard</button>
+</nav>
 </div>
 </header>
 
-<main>
-<section id="home">
+<main class="wrap">
+<section id="home" class="page active">
 <div class="hero">
-<div class="tag">LEARN • COMPETE • ACHIEVE</div>
-<h1>Challenge Your Mind.</h1>
-<p>Answer challenging questions, earn points and discover what you know.</p>
-<button onclick="startQuiz()">Start Quiz →</button>
-<button class="secondary" onclick="showPage('prizes')">Daily Prizes</button>
+<div>🇲🇼 Learn • Challenge Yourself • Win</div>
+<h1>MALAWI HUB</h1>
+<p>Test your knowledge with Malawi, school and science questions.</p>
+<button class="btn" onclick="startQuiz()">Start Free Quiz</button>
+<button class="btn secondary" onclick="showPage('leaderboard')">View Leaderboard</button>
 </div>
-
 <div class="grid">
-<div class="card">
-<div class="muted">Proposed daily prize pool</div>
-<div class="stat">MK 5,000</div>
+<div class="stat">Daily round<strong>10 questions</strong><span class="small">A short quiz round</span></div>
+<div class="stat">Time per question<strong>10 seconds</strong><span class="small">Answer before time runs out</span></div>
+<div class="stat">Entry fee<strong>FREE</strong><span class="small">No payment required</span></div>
 </div>
-<div class="card">
-<div class="muted">Your practice points</div>
-<div class="stat" id="totalScore">0</div>
-</div>
-</div>
-
-<div class="card">
-<h2>🎯 Your Challenge</h2>
-<label for="playerName">Display name</label>
-<input id="playerName" maxlength="20" placeholder="Enter a nickname">
-<label for="category">Choose quiz category</label>
-<select id="category">
-<option value="mixed">Mixed Challenge</option>
-<option value="school">School Subjects</option>
-<option value="malawi">Malawi Knowledge</option>
-<option value="science">Science & Mathematics</option>
-</select>
-<button onclick="startQuiz()">Start Challenge</button>
-<p class="muted">One point for each correct answer.</p>
-</div>
-
-<div class="card">
-<h2>🏆 Leaderboard</h2>
-<div id="previewBoard"></div>
-<button class="secondary" onclick="showPage('leaderboard')">Full Leaderboard</button>
+<div class="panel">
+<h2>How to play</h2>
+<ol>
+<li>Enter a display name.</li>
+<li>Choose a quiz category.</li>
+<li>Answer each question within 10 seconds.</li>
+<li>Correct answers earn 1 point.</li>
+<li>View your score and the leaderboard.</li>
+</ol>
+<div class="notice">Use a nickname. Never share your password, PIN or mobile-money secret code.</div>
 </div>
 </section>
 
-<section id="quiz" class="hidden">
-<div class="card">
-<div class="tag" id="quizCategory">CHALLENGE</div>
-<p class="muted" id="progress"></p>
+<section id="quiz" class="page">
+<div class="panel">
+<h2>Play the quiz</h2>
+<div id="setup">
+<label for="playerName">Your display name</label>
+<input id="playerName" class="field" maxlength="24" placeholder="Enter a nickname">
+<label for="category">Choose category</label>
+<select id="category" class="field">
+<option value="all">Mixed Quiz</option>
+<option value="malawi">Malawi Knowledge</option>
+<option value="school">School Subjects</option>
+<option value="science">Science</option>
+</select>
+<button class="btn" onclick="beginQuiz()">Start 10 Questions</button>
+</div>
+<div id="game" hidden>
+<div class="timer-row">
+<span id="progress">Question 1 of 10</span>
+<span id="timer" class="timer" aria-live="polite">⏱️ 10s</span>
+</div>
+<div class="bar"><span id="timeBar"></span></div>
 <div class="question" id="questionText"></div>
 <div id="options"></div>
 <div id="feedback" aria-live="polite"></div>
-<button id="nextButton" onclick="nextQuestion()" disabled>Next Question →</button>
-<button class="secondary" onclick="showPage('home')">Exit Quiz</button>
+<button class="btn" id="nextButton" onclick="nextQuestion()" disabled>Next question</button>
+<button class="btn secondary" onclick="confirmExit()">Exit quiz</button>
+</div>
+<div id="result" hidden>
+<h2>Quiz complete!</h2>
+<p id="resultText"></p>
+<button class="btn" onclick="showPage('leaderboard')">View Leaderboard</button>
+<button class="btn secondary" onclick="resetQuiz()">Play Again</button>
+</div>
 </div>
 </section>
 
-<section id="results" class="hidden">
-<div class="card">
-<h2>Challenge Complete! 🎉</h2>
-<div class="stat" id="finalScore"></div>
-<p id="resultMessage"></p>
-<p class="muted">These are practice points, not a cash balance or guaranteed prize.</p>
-<button onclick="showPage('home')">Home</button>
-<button class="secondary" onclick="showPage('leaderboard')">Leaderboard</button>
+<section id="prizes" class="page">
+<div class="panel">
+<h2>Daily prizes</h2>
+<p>Example prize allocation funded by the organiser.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Place</th><th>Prize</th></tr></thead>
+<tbody>
+<tr><td>1st</td><td class="prize">MK 1,500</td></tr>
+<tr><td>2nd</td><td class="prize">MK 1,000</td></tr>
+<tr><td>3rd</td><td class="prize">MK 700</td></tr>
+<tr><td>4th</td><td>MK 500</td></tr>
+<tr><td>5th</td><td>MK 400</td></tr>
+<tr><td>6th</td><td>MK 300</td></tr>
+<tr><td>7th</td><td>MK 200</td></tr>
+<tr><td>8th</td><td>MK 150</td></tr>
+<tr><td>9th</td><td>MK 150</td></tr>
+<tr><td>10th</td><td>MK 100</td></tr>
+<tr><th>Total</th><th>MK 5,000</th></tr>
+</tbody>
+</table>
+</div>
+<p class="notice">This demo does not send money or automatically verify winners. Publish clear prize rules and verify winners fairly.</p>
+<a class="btn" href="https://wa.me/265885801081?text=Hello%2C%20I%20have%20a%20question%20about%20MALAWI%20HUB" target="_blank" rel="noopener">Ask organiser on WhatsApp</a>
 </div>
 </section>
 
-<section id="prizes" class="hidden">
-<div class="card">
-<h2>🏆 Daily Prize Pool</h2>
-<div class="stat">MK 5,000</div>
-<p class="muted">Proposed organizer-funded prizes for the top 10 verified winners.</p>
-<div id="prizeList"></div>
-<p class="notice">Free entry. No registration fee or deposit is required. Actual prize payments need funding, verification and published rules.</p>
-<button onclick="showPage('home')">Back Home</button>
+<section id="leaderboard" class="page">
+<div class="panel">
+<h2>Leaderboard on this device</h2>
+<p class="small">Scores are stored in this browser only, not shared online.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Rank</th><th>Player</th><th>Score</th></tr></thead>
+<tbody id="leaderRows"></tbody>
+</table>
 </div>
-</section>
-
-<section id="leaderboard" class="hidden">
-<div class="card">
-<h2>🥇 Leaderboard</h2>
-<p class="muted">Demonstration scores saved on this device only.</p>
-<div id="fullBoard"></div>
-<button class="secondary" onclick="showPage('home')">Back Home</button>
+<button class="btn secondary" onclick="renderLeaderboard()">Refresh</button>
 </div>
 </section>
 </main>
 
 <footer>
-<strong>MALAWI HUB 🇲🇼</strong>
-<p>Learn something new every day.</p>
-  </footer>
-  
+<strong>MALAWI HUB</strong>
+<p>Free quiz demo • Learn something new and enjoy.</p>
+</footer>
 
 <script>
-"use strict";
+'use strict';
 
-const WHATSAPP_NUMBER = "265885801081";
-
-const prizes = [
-  ["1st place", 1500],
-  ["2nd place", 1000],
-  ["3rd place", 700],
-  ["4th place", 500],
-  ["5th place", 400],
-  ["6th place", 300],
-  ["7th place", 200],
-  ["8th place", 150],
-  ["9th place", 150],
-  ["10th place", 100]
+const QUESTIONS = [
+{category:'malawi',q:'What is the capital city of Malawi?',options:['Blantyre','Lilongwe','Mzuzu','Zomba'],answer:1,explanation:'Lilongwe is the capital city of Malawi.'},
+{category:'malawi',q:'Which lake lies along much of Malawi’s eastern border?',options:['Lake Tanganyika','Lake Victoria','Lake Malawi','Lake Chad'],answer:2,explanation:'Lake Malawi is a major lake along the country’s eastern side.'},
+{category:'malawi',q:'What is the currency of Malawi?',options:['Kwacha','Rand','Shilling','Naira'],answer:0,explanation:'Malawi uses the Malawian kwacha.'},
+{category:'malawi',q:'Which city is a major commercial centre in southern Malawi?',options:['Karonga','Blantyre','Rumphi','Dedza'],answer:1,explanation:'Blantyre is a major commercial centre.'},
+{category:'malawi',q:'Which language is widely spoken in Malawi alongside English?',options:['Chichewa','Zulu only','Arabic','Portuguese only'],answer:0,explanation:'Chichewa is widely spoken in Malawi.'},
+{category:'school',q:'What is 12 × 8?',options:['84','96','108','88'],answer:1,explanation:'12 multiplied by 8 equals 96.'},
+{category:'school',q:'Which word is a noun?',options:['Quickly','Beautiful','Teacher','Run'],answer:2,explanation:'A teacher is a person, so “teacher” is a noun.'},
+{category:'science',q:'Which gas do plants take in during photosynthesis?',options:['Oxygen','Carbon dioxide','Nitrogen','Hydrogen'],answer:1,explanation:'Plants use carbon dioxide during photosynthesis.'},
+{category:'science',q:'What is the chemical formula for water?',options:['CO₂','O₂','H₂O','NaCl'],answer:2,explanation:'A water molecule contains two hydrogen atoms and one oxygen atom.'},
+{category:'science',q:'Which method can separate insoluble sand from water?',options:['Filtration','Freezing only','Magnetism','Distillation only'],answer:0,explanation:'Filtration traps sand while water passes through the filter.'},
+{category:'science',q:'What is the basic unit of life?',options:['Atom','Cell','Organ','Tissue'],answer:1,explanation:'The cell is the basic unit of life.'},
+{category:'school',q:'Solve: x + 7 = 15.',options:['6','7','8','9'],answer:2,explanation:'Subtract 7 from both sides: x = 8.'},
+{category:'malawi',q:'Malawi is located on which continent?',options:['Asia','Africa','Europe','South America'],answer:1,explanation:'Malawi is a country in southeastern Africa.'},
+{category:'science',q:'At standard atmospheric pressure, water boils at approximately what temperature?',options:['50°C','75°C','100°C','150°C'],answer:2,explanation:'Water boils at about 100°C at standard atmospheric pressure.'},
+{category:'school',q:'What is the plural of “child”?',options:['Childs','Childes','Children','Childrens'],answer:2,explanation:'The plural form of child is children.'},
+{category:'science',q:'Which part of a plant mainly absorbs water from soil?',options:['Flower','Roots','Fruit','Stem tip'],answer:1,explanation:'Roots absorb water and mineral salts from the soil.'},
+{category:'school',q:'What is the square of 9?',options:['18','72','81','99'],answer:2,explanation:'9 × 9 = 81.'},
+{category:'malawi',q:'Which ocean is east of Malawi, beyond Mozambique?',options:['Atlantic Ocean','Indian Ocean','Arctic Ocean','Southern Ocean'],answer:1,explanation:'The Indian Ocean lies to the east of Mozambique.'},
+{category:'science',q:'Which instrument measures temperature?',options:['Thermometer','Barometer','Compass','Ruler'],answer:0,explanation:'A thermometer measures temperature.'},
+{category:'school',q:'Which punctuation mark normally ends a direct question?',options:['Full stop','Comma','Question mark','Colon'],answer:2,explanation:'A question mark normally ends a direct question.'}
 ];
 
-const questions = [
-  {
-    category:"malawi",
-    q:"In which year did Malawi gain independence?",
-    options:["1953","1964","1966","1994"],
-    answer:1,
-    explanation:"Malawi gained independence on 6 July 1964."
-  },
-  {
-    category:"school",
-    q:"Factorise x² − 7x + 12.",
-    options:["(x−3)(x−4)","(x+3)(x+4)","(x−2)(x−6)","(x+2)(x−6)"],
-    answer:0,
-    explanation:"−3 and −4 multiply to 12 and add to −7."
-  },
-  {
-    category:"science",
-    q:"Which gas is absorbed by plants during photosynthesis?",
-    options:["Oxygen","Hydrogen","Carbon dioxide","Nitrogen"],
-    answer:2,
-    explanation:"Plants use carbon dioxide, water and light to make food."
-  },
-  {
-    category:"school",
-    q:"Which soil particles are the smallest?",
-    options:["Sand","Gravel","Silt","Clay"],
-    answer:3,
-    explanation:"Clay particles are smaller than silt and sand particles."
-  },
-  {
-    category:"malawi",
-    q:"What is the capital city of Malawi?",
-    options:["Blantyre","Lilongwe","Mzuzu","Zomba"],
-    answer:1,
-    explanation:"Lilongwe is Malawi's capital city."
-  },
-  {
-    category:"science",
-    q:"Solve 2x² − 7x + 3 = 0.",
-    options:["x=3 or 1/2","x=2 or 3","x=−3 or −1/2","x=1 or 2"],
-    answer:0,
-    explanation:"(2x−1)(x−3)=0, so x=1/2 or x=3."
-  },
-  {
-    category:"school",
-    q:"What is the gradient of y = 5x − 2?",
-    options:["−2","2","5","−5"],
-    answer:2,
-    explanation:"In y=mx+c, the gradient is m, which is 5."
-  },
-  {
-    category:"science",
-    q:"What is the chemical symbol for potassium?",
-    options:["P","Pt","K","Po"],
-    answer:2,
-    explanation:"The chemical symbol for potassium is K."
-  },
-  {
-    category:"malawi",
-    q:"Which lake is the largest in Malawi?",
-    options:["Lake Chilwa","Lake Malawi","Lake Malombe","Lake Chiuta"],
-    answer:1,
-    explanation:"Lake Malawi is the country's largest lake."
-  },
-  {
-    category:"science",
-    q:"What is the approximate acceleration due to gravity near Earth's surface?",
-    options:["9.8 m/s²","98 m/s²","0.98 m/s²","980 m/s²"],
-    answer:0,
-    explanation:"The approximate value is 9.8 metres per second squared."
-  },
-  {
-    category:"school",
-    q:"Which method separates an insoluble solid from a liquid?",
-    options:["Evaporation","Filtration","Distillation","Condensation"],
-    answer:1,
-    explanation:"Filtration separates an insoluble solid from a liquid."
-  },
-  {
-    category:"malawi",
-    q:"Which ocean is nearest to Malawi?",
-    options:["Atlantic","Pacific","Indian","Arctic"],
-    answer:2,
-    explanation:"The Indian Ocean lies to the east of Malawi."
-  },
-  {
-    category:"science",
-    q:"A body travels 150 metres in 30 seconds. What is its average speed?",
-    options:["3 m/s","5 m/s","30 m/s","180 m/s"],
-    answer:1,
-    explanation:"Speed = distance ÷ time = 150 ÷ 30 = 5 m/s."
-  },
-  {
-    category:"school",
-    q:"What is the sum of the interior angles of a triangle?",
-    options:["90°","180°","270°","360°"],
-    answer:1,
-    explanation:"The interior angles of a triangle add up to 180°."
-  },
-  {
-    category:"science",
-    q:"Which blood cells mainly transport oxygen?",
-    options:["Red blood cells","White blood cells","Platelets","Plasma cells"],
-    answer:0,
-    explanation:"Red blood cells contain haemoglobin, which transports oxygen."
-  },
-  {
-    category:"school",
-    q:"Simplify 3(2x − 4) + 5x.",
-    options:["11x − 12","6x − 7","11x + 12","x − 12"],
-    answer:0,
-    explanation:"Expand to get 6x − 12 + 5x = 11x − 12."
-  },
-  {
-    category:"malawi",
-    q:"What is the currency of Malawi?",
-    options:["Kwacha","Rand","Shilling","Pula"],
-    answer:0,
-    explanation:"Malawi uses the Malawian kwacha (MWK)."
-  },
-  {
-    category:"science",
-    q:"Which part of a plant mainly absorbs water from the soil?",
-    options:["Flower petals","Root hairs","Fruit","Stem bark"],
-    answer:1,
-    explanation:"Root hairs provide a large surface area for water absorption."
+let quizQuestions=[];
+let questionIndex=0;
+let score=0;
+let answered=false;
+let timeLeft=10;
+let timerInterval=null;
+let player='Player';
+
+function showPage(id){
+ stopQuestionTimer();
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ if(id==='leaderboard') renderLeaderboard();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function startQuiz(){
+ showPage('quiz');
+ document.getElementById('setup').hidden=false;
+ document.getElementById('game').hidden=true;
+ document.getElementById('result').hidden=true;
+}
+
+function shuffle(arr){
+ const copy=arr.slice();
+ for(let i=copy.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [copy[i],copy[j]]=[copy[j],copy[i]];
+ }
+ return copy;
+}
+
+function beginQuiz(){
+ player=(document.getElementById('playerName').value.trim()||'Player').slice(0,24);
+ const category=document.getElementById('category').value;
+ let pool=QUESTIONS.filter(q=>category==='all'||q.category===category);
+ if(pool.length<10) pool=QUESTIONS.slice();
+ quizQuestions=shuffle(pool).slice(0,10);
+ questionIndex=0;
+ score=0;
+ document.getElementById('setup').hidden=true;
+ document.getElementById('game').hidden=false;
+ document.getElementById('result').hidden=true;
+ renderQuestion();
+}
+
+function renderQuestion(){
+ stopQuestionTimer();
+ answered=false;
+ const q=quizQuestions[questionIndex];
+ document.getElementById('progress').textContent=`Question ${questionIndex+1} of ${quizQuestions.length} • Score: ${score}`;
+ document.getElementById('questionText').textContent=q.q;
+ document.getElementById('feedback').textContent='';
+ const opts=document.getElementById('options');
+ opts.replaceChildren();
+
+ q.options.forEach((option,index)=>{
+  const b=document.createElement('button');
+  b.type='button';
+  b.className='option';
+  b.textContent=String.fromCharCode(65+index)+'. '+option;
+  b.onclick=()=>chooseAnswer(index,b);
+  opts.appendChild(b);
+ });
+
+ const next=document.getElementById('nextButton');
+ next.disabled=true;
+ next.textContent=questionIndex===quizQuestions.length-1?'Finish quiz':'Next question';
+ startQuestionTimer();
+}
+
+function startQuestionTimer(){
+ stopQuestionTimer();
+ timeLeft=10;
+ updateTimerDisplay();
+
+ timerInterval=setInterval(()=>{
+  if(answered){stopQuestionTimer();return;}
+  timeLeft--;
+  updateTimerDisplay();
+
+  if(timeLeft<=0){
+   stopQuestionTimer();
+   chooseAnswer(-1,null);
   }
-];
-
-let quizQuestions = [];
-let questionIndex = 0;
-let score = 0;
-let answered = false;
-let player = "Player";
-let category = "mixed";
-
-function readStorage(key, fallback) {
-  try {
-    const value = localStorage.getItem(key);
-    return value === null ? fallback : JSON.parse(value);
-  } catch (error) {
-    return fallback;
-  }
+ },1000);
 }
 
-function writeStorage(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {}
+function stopQuestionTimer(){
+ if(timerInterval!==null){
+  clearInterval(timerInterval);
+  timerInterval=null;
+ }
 }
 
-function showPage(page) {
-  document.querySelectorAll("main section").forEach(section => {
-    section.classList.add("hidden");
-  });
-
-  const selected = document.getElementById(page);
-  if (selected) selected.classList.remove("hidden");
-
-  window.scrollTo({top:0, behavior:"smooth"});
-
-  if (page === "leaderboard") renderLeaderboard();
+function updateTimerDisplay(){
+ const timer=document.getElementById('timer');
+ const bar=document.getElementById('timeBar');
+ if(timer){
+  timer.textContent='⏱️ '+timeLeft+'s';
+  timer.classList.toggle('low',timeLeft<=3);
+ }
+ if(bar) bar.style.width=(Math.max(0,timeLeft)/10*100)+'%';
 }
 
-function addWhatsAppButtons() {
-  const home = document.getElementById("home");
-  const prizesSection = document.getElementById("prizes");
+function chooseAnswer(index,chosenButton){
+ if(answered) return;
+ answered=true;
+ stopQuestionTimer();
 
-  const homeButton = document.createElement("button");
-  homeButton.textContent = "💬 Prize Withdrawal / Enquiry";
-  homeButton.onclick = contactWhatsApp;
+ const q=quizQuestions[questionIndex];
+ const buttons=document.querySelectorAll('#options button');
+ buttons.forEach((button,i)=>{
+  button.disabled=true;
+  if(i===q.answer) button.classList.add('correct');
+ });
 
-  const homeCard = document.createElement("div");
-  homeCard.className = "card";
-  homeCard.innerHTML =
-    "<h2>Prize Support</h2>" +
-    "<p class='muted'>Contact the organizer about contest rules or a verified prize.</p>";
-  homeCard.appendChild(homeButton);
-  home.appendChild(homeCard);
+ const feedback=document.getElementById('feedback');
 
-  const prizeButton = document.createElement("button");
-  prizeButton.textContent = "💬 Ask About Prize";
-  prizeButton.onclick = contactWhatsApp;
-  prizesSection.querySelector(".card").appendChild(prizeButton);
+ if(index===-1){
+  feedback.textContent='⏰ Time is up! No point awarded. '+q.explanation;
+  feedback.style.color='#ffd166';
+ }else if(index===q.answer){
+  score++;
+  feedback.textContent='Correct! +1 point. '+q.explanation;
+  feedback.style.color='#00d084';
+ }else{
+  if(chosenButton) chosenButton.classList.add('wrong');
+  feedback.textContent='Not quite. '+q.explanation;
+  feedback.style.color='#ffd166';
+ }
+
+ document.getElementById('progress').textContent=`Question ${questionIndex+1} of ${quizQuestions.length} • Score: ${score}`;
+ document.getElementById('nextButton').disabled=false;
 }
 
-function contactWhatsApp() {
-  const message =
-    "Hello MALAWI HUB administrator. I would like to ask about a verified quiz prize. " +
-    "My display name is " +
-    (document.getElementById("playerName").value.trim() || "Not provided") +
-    ". Please explain the winner verification process.";
-
-  const url = "https://wa.me/" + WHATSAPP_NUMBER +
-    "?text=" + encodeURIComponent(message);
-
-  window.open(url, "_blank", "noopener,noreferrer");
-}
-
-function renderPrizes() {
-  const target = document.getElementById("prizeList");
-
-  target.innerHTML = prizes.map((prize, index) =>
-    '<div class="prize-row"><span>' +
-    (index + 1) + ". " + prize[0] +
-    '</span><span class="gold">MK ' +
-    prize[1].toLocaleString() +
-    '</span></div>'
-  ).join("");
-
-  const total = prizes.reduce((sum, prize) => sum + prize[1], 0);
-
-  const totalLine = document.createElement("p");
-  totalLine.className = "gold";
-  totalLine.textContent = "Total prize budget: MK " + total.toLocaleString();
-  target.appendChild(totalLine);
-}
-
-function updateTotal() {
-  const scores = readStorage("malawiHubScores", []);
-  const total = scores.reduce((sum, item) => sum + item.score, 0);
-  document.getElementById("totalScore").textContent = total;
-}
-
-function startQuiz() {
-  player = document.getElementById("playerName").value.trim() || "Player";
-  category = document.getElementById("category").value;
-
-  let available = questions.filter(q =>
-    category === "mixed" || q.category === category
-  );
-
-  // Shuffle the question order for each practice attempt.
-  quizQuestions = [...available].sort(() => Math.random() - 0.5);
-  questionIndex = 0;
-  score = 0;
-  answered = false;
-
-  document.getElementById("quizCategory").textContent =
-    document.getElementById("category").selectedOptions[0].text;
-
-  showPage("quiz");
-  renderQuestion();
-}
-
-function renderQuestion() {
-  if (questionIndex >= quizQuestions.length) {
-    finishQuiz();
-    return;
-  }
-
-  answered = false;
-  const q = quizQuestions[questionIndex];
-
-  document.getElementById("progress").textContent =
-    "Question " + (questionIndex + 1) + " of " + quizQuestions.length;
-
-  document.getElementById("questionText").textContent = q.q;
-  document.getElementById("feedback").textContent = "";
-
-  const options = document.getElementById("options");
-  options.innerHTML = "";
-
-  q.options.forEach((option, index) => {
-    const button = document.createElement("button");
-    button.className = "option";
-    button.textContent = String.fromCharCode(65 + index) + ". " + option;
-    button.onclick = () => chooseAnswer(index, button);
-    options.appendChild(button);
-  });
-
-  document.getElementById("nextButton").disabled = true;
-  document.getElementById("nextButton").textContent =
-    questionIndex === quizQuestions.length - 1 ? "Finish Quiz" : "Next Question →";
-}
-
-function chooseAnswer(index, chosenButton) {
-  if (answered) return;
-  answered = true;
-
-  const q = quizQuestions[questionIndex];
-  const buttons = document.querySelectorAll("#options button");
-
-  buttons.forEach((button, i) => {
-    button.disabled = true;
-    if (i === q.answer) button.classList.add("correct");
-  });
-
-  const feedback = document.getElementById("feedback");
-
-  if (index === q.answer) {
-    score++;
-    feedback.textContent = "Correct! +1 point. " + q.explanation;
-    feedback.style.color = "#00d084";
-  } else {
-    chosenButton.classList.add("wrong");
-    feedback.textContent = "Not quite. " + q.explanation;
-    feedback.style.color = "#ffd166";
-  }
-
-  document.getElementById("nextButton").disabled = false;
-}
-
-function nextQuestion() {
-  if (!answered) return;
+function nextQuestion(){
+ if(!answered) return;
+ if(questionIndex<quizQuestions.length-1){
   questionIndex++;
   renderQuestion();
+ }else{
+  finishQuiz();
+ }
 }
 
-function finishQuiz() {
-  const records = readStorage("malawiHubScores", []);
+function finishQuiz(){
+ stopQuestionTimer();
+ document.getElementById('game').hidden=true;
+ document.getElementById('result').hidden=false;
+ document.getElementById('resultText').textContent=`${player}, your score is ${score} out of ${quizQuestions.length}.`;
+ saveScore(player,score);
+}
 
-  records.push({
-    name: player.slice(0, 20),
-    score: score,
-    date: new Date().toISOString()
+function resetQuiz(){
+ document.getElementById('result').hidden=true;
+ document.getElementById('setup').hidden=false;
+ document.getElementById('game').hidden=true;
+}
+
+function confirmExit(){
+ if(confirm('Exit this quiz? Your current round will not be saved.')){
+  stopQuestionTimer();
+  startQuiz();
+ }
+}
+
+function getScores(){
+ try{
+  const data=JSON.parse(localStorage.getItem('malawiHubScores')||'[]');
+  return Array.isArray(data)?data:[];
+ }catch(e){
+  return [];
+ }
+}
+
+function saveScore(name,points){
+ const scores=getScores();
+ scores.push({name,score:points,date:new Date().toISOString()});
+ scores.sort((a,b)=>b.score-a.score||a.date.localeCompare(b.date));
+ try{
+  localStorage.setItem('malawiHubScores',JSON.stringify(scores.slice(0,100)));
+ }catch(e){}
+ renderLeaderboard();
+}
+
+function renderLeaderboard(){
+ const rows=document.getElementById('leaderRows');
+ if(!rows) return;
+ rows.replaceChildren();
+ const scores=getScores().slice(0,10);
+
+ if(!scores.length){
+  const tr=document.createElement('tr');
+  const td=document.createElement('td');
+  td.colSpan=3;
+  td.textContent='No scores yet. Play a quiz to appear here.';
+  tr.appendChild(td);
+  rows.appendChild(tr);
+  return;
+ }
+
+ scores.forEach((item,i)=>{
+  const tr=document.createElement('tr');
+  [String(i+1),String(item.name||'Player'),String(item.score)].forEach(value=>{
+   const td=document.createElement('td');
+   td.textContent=value;
+   tr.appendChild(td);
   });
-
-  records.sort((a, b) => b.score - a.score);
-  writeStorage("malawiHubScores", records.slice(0, 50));
-
-  document.getElementById("finalScore").textContent =
-    score + " / " + quizQuestions.length + " points";
-
-  document.getElementById("resultMessage").textContent =
-    "Well done, " + player + "! You answered " + score +
-    " questions correctly.";
-
-  updateTotal();
-  showPage("results");
+  rows.appendChild(tr);
+ });
 }
 
-function renderLeaderboard() {
-  const records = readStorage("malawiHubScores", []);
-  const sorted = [...records].sort((a, b) => b.score - a.score).slice(0, 10);
-
-  let html = "<table><thead><tr><th>Rank</th><th>Player</th><th>Points</th></tr></thead><tbody>";
-
-  if (sorted.length === 0) {
-    html += '<tr><td colspan="3">No practice scores yet. Play a quiz first!</td></tr>';
-  } else {
-    sorted.forEach((item, index) => {
-      html += "<tr><td>" + (index + 1) +
-        "</td><td>" + escapeHTML(item.name) +
-        "</td><td>" + item.score + "</td></tr>";
-    });
-  }
-
-  html += "</tbody></table>";
-
-  document.getElementById("previewBoard").innerHTML = html;
-  document.getElementById("fullBoard").innerHTML = html;
-}
-
-function escapeHTML(text) {
-  return String(text).replace(/[&<>"']/g, character => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  })[character]);
-}
-
-renderPrizes();
-updateTotal();
 renderLeaderboard();
-addWhatsAppButtons();
 </script>
 </body>
 </html>
