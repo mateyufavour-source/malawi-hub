@@ -4,544 +4,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#075e3b">
-<meta name="description" content="Malawi Hub - Education, jobs, farming, business and opportunities in Malawi.">
-<title>Malawi Hub | Malawi's Information Centre</title>
-
+<meta name="theme-color" content="#07110e">
+<title>MALAWI HUB - Quiz & Learn</title>
 <style>
-:root {
-  --green:#075e3b;
-  --dark:#043d29;
-  --gold:#ffd044;
-  --bg:#f3f7f4;
-  --text:#203129;
+:root{
+--bg:#07110e;--panel:#12221a;--green:#00d084;
+--gold:#ffd166;--text:#fff;--muted:#a9b9af;
 }
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
-body {
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.6;
+*{box-sizing:border-box}
+body{
+margin:0;background:var(--bg);color:var(--text);
+font-family:Arial,sans-serif;line-height:1.5
 }
-.container {width:min(1100px,94%);margin:auto}
-header {
-  background:var(--green);
-  color:white;
-  padding:18px 0;
+header{
+padding:16px;background:#0d1b14;
+border-bottom:1px solid #294438
 }
-.brand {font-size:26px;font-weight:bold}
-.brand span {color:var(--gold)}
-.tagline {font-size:13px}
-nav {display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
-nav a {color:white;text-decoration:none;font-size:14px}
-nav a:hover {text-decoration:underline}
-.hero {
-  background:linear-gradient(135deg,var(--green),var(--dark));
-  color:white;
-  text-align:center;
-  padding:45px 15px;
+.nav{
+max-width:950px;margin:auto;display:flex;
+align-items:center;justify-content:space-between;gap:10px
 }
-.hero h1 {font-size:clamp(28px,6vw,45px);margin:0 0 10px}
-.hero p {max-width:650px;margin:0 auto 18px}
-.search {
-  display:flex;
-  gap:8px;
-  max-width:650px;
-  margin:20px auto 0;
+.logo{font-size:21px;font-weight:900}
+.logo span{color:var(--green)}
+main{max-width:950px;margin:auto;padding:16px}
+.hero{
+padding:25px 20px;border-radius:18px;
+background:linear-gradient(135deg,#12452d,#10231a,#44371b);
+border:1px solid #315744;margin-bottom:16px
 }
-input,button,textarea {font:inherit}
-.search input {
-  flex:1;min-width:0;padding:13px;
-  border:0;border-radius:7px;
+.hero h1{font-size:clamp(30px,7vw,45px);line-height:1.15}
+.tag{color:var(--gold);font-weight:bold;font-size:13px}
+.card{
+background:var(--panel);border:1px solid #294438;
+border-radius:15px;padding:17px;margin-bottom:15px
 }
-button,.btn {
-  display:inline-block;
-  padding:11px 15px;
-  border:0;border-radius:7px;
-  background:var(--gold);color:#222;
-  text-decoration:none;font-weight:bold;
-  cursor:pointer;
+.grid{
+display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px
 }
-button:hover,.btn:hover {filter:brightness(.94)}
-main {padding:28px 0 40px}
-section {margin-bottom:35px;scroll-margin-top:15px}
-h2 {color:var(--green);margin-bottom:7px}
-.subtitle {color:#5b6a60;margin-top:0}
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
+.stat{font-size:27px;color:var(--gold);font-weight:900}
+.muted{color:var(--muted);font-size:14px}
+button,input,select{font:inherit}
+button{
+padding:12px 15px;border:0;border-radius:9px;
+background:var(--green);color:#06140d;
+font-weight:bold;cursor:pointer;margin:4px 3px 4px 0
 }
-.card {
-  background:white;
-  padding:19px;
-  border-radius:12px;
-  border:1px solid #e0e9e2;
-  box-shadow:0 3px 12px #00000008;
+button.secondary{background:#293c31;color:white}
+button:disabled{opacity:.5}
+input,select{
+width:100%;padding:12px;margin:8px 0 14px;
+border:1px solid #355044;border-radius:9px;
+background:#08140f;color:white
 }
-.card h3 {color:var(--green);margin:5px 0}
-.card p {font-size:14px;color:#526057}
-.card a {color:var(--green);font-weight:bold}
-.emoji {font-size:30px}
-.notice {
-  padding:14px;
-  border-left:4px solid var(--gold);
-  background:#fff6d9;
-  border-radius:6px;
-  font-size:14px;
+label{display:block;color:#d5e3da;font-size:14px}
+.hidden{display:none!important}
+.question{font-size:20px;font-weight:bold;margin:18px 0}
+.option{
+display:block;width:100%;text-align:left;
+background:#20352a;color:white;border:1px solid #355044;
+margin:8px 0
 }
-.quiz-box {background:white;padding:20px;border-radius:12px}
-#answers {display:grid;gap:10px;margin:18px 0}
-#answers button {
-  text-align:left;
-  background:#edf4ef;
-  border:1px solid #d4e2d8;
+.option.correct{background:#145a37}
+.option.wrong{background:#642c2c}
+#feedback{font-weight:bold;margin:12px 0}
+.prize-row{
+display:flex;justify-content:space-between;gap:10px;
+padding:10px 0;border-bottom:1px solid #294438
 }
-#answers button.correct {background:#ccebd5}
-#answers button.incorrect {background:#ffe0dc}
-#answers button:disabled {cursor:default}
-#quizResult {font-weight:bold}
-.hidden {display:none!important}
-footer {background:var(--dark);color:white;padding:26px 0;text-align:center}
-footer a {color:var(--gold)}
-.small {font-size:12px;color:#dce9df}
-@media(max-width:480px) {
-  .search {flex-direction:column}
-  .search button {width:100%}
-  nav {gap:10px}
+.gold{color:var(--gold);font-weight:bold}
+table{width:100%;border-collapse:collapse}
+th,td{
+padding:10px 6px;text-align:left;
+border-bottom:1px solid #294438
+}
+th{color:var(--gold)}
+.notice{
+padding:12px;border-left:3px solid var(--gold);
+background:#20291e;font-size:13px
+}
+footer{text-align:center;color:var(--muted);padding:25px 10px}
+@media(max-width:550px){
+.grid{grid-template-columns:1fr}
+main{padding:11px}
+.hero{padding:20px 15px}
 }
 </style>
 </head>
-
 <body>
 <header>
-  <div class="container">
-    <div class="brand">MALAWI <span>HUB</span> 🇲🇼</div>
-    <div class="tagline">Your information. Your opportunities. Your Malawi.</div>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#education">Education</a>
-      <a href="#jobs">Jobs</a>
-      <a href="#business">Business</a>
-      <a href="#farming">Farming</a>
-      <a href="#about">About Malawi</a>
-      <a href="#quiz">Quiz</a>
-    </nav>
-  </div>
+<div class="nav">
+<div class="logo">MALAWI <span>HUB 🇲🇼</span></div>
+<button class="secondary" onclick="showPage('home')">Home</button>
+</div>
 </header>
 
-<section class="hero" id="home">
-  <div class="container">
-    <h1>Welcome to Malawi Hub</h1>
-    <p>
-      One place to explore learning resources, careers, scholarships,
-      business ideas, agriculture and information about Malawi.
-    </p>
+<main>
+<section id="home">
+<div class="hero">
+<div class="tag">LEARN • COMPETE • ACHIEVE</div>
+<h1>Challenge Your Mind.</h1>
+<p>Answer challenging questions, earn points and discover what you know.</p>
+<button onclick="startQuiz()">Start Quiz →</button>
+<button class="secondary" onclick="showPage('prizes')">Daily Prizes</button>
+</div>
 
-    <form class="search" id="searchForm">
-      <input id="searchInput" type="search"
-        placeholder="Search education, jobs, farming..."
-        aria-label="Search sections">
-      <button type="submit">Search</button>
-    </form>
-  </div>
+<div class="grid">
+<div class="card">
+<div class="muted">Proposed daily prize pool</div>
+<div class="stat">MK 5,000</div>
+</div>
+<div class="card">
+<div class="muted">Your practice points</div>
+<div class="stat" id="totalScore">0</div>
+</div>
+</div>
+
+<div class="card">
+<h2>🎯 Your Challenge</h2>
+<label for="playerName">Display name</label>
+<input id="playerName" maxlength="20" placeholder="Enter a nickname">
+<label for="category">Choose quiz category</label>
+<select id="category">
+<option value="mixed">Mixed Challenge</option>
+<option value="school">School Subjects</option>
+<option value="malawi">Malawi Knowledge</option>
+<option value="science">Science & Mathematics</option>
+</select>
+<button onclick="startQuiz()">Start Challenge</button>
+<p class="muted">One point for each correct answer.</p>
+</div>
+
+<div class="card">
+<h2>🏆 Leaderboard</h2>
+<div id="previewBoard"></div>
+<button class="secondary" onclick="showPage('leaderboard')">Full Leaderboard</button>
+</div>
 </section>
 
-<main class="container">
-
-<section id="services">
-  <h2>Explore Our Services</h2>
-  <p class="subtitle">Choose a category to get started.</p>
-
-  <div class="grid" id="categoryGrid">
-    <article class="card" data-search="education school notes mathematics chemistry biology agriculture students exams">
-      <div class="emoji">📚</div>
-      <h3>Education Centre</h3>
-      <p>Explore school subjects, revision notes, study tips and practice questions.</p>
-      <a href="#education">Open Education →</a>
-    </article>
-
-    <article class="card" data-search="jobs employment careers vacancies work opportunities">
-      <div class="emoji">💼</div>
-      <h3>Jobs & Careers</h3>
-      <p>Find official recruitment sources and learn about different careers.</p>
-      <a href="#jobs">Explore Jobs →</a>
-    </article>
-
-    <article class="card" data-search="scholarships university college grants education funding">
-      <div class="emoji">🎓</div>
-      <h3>Scholarships</h3>
-      <p>Learn how to find scholarship announcements and prepare applications.</p>
-      <a href="#scholarships">Explore Scholarships →</a>
-    </article>
-
-    <article class="card" data-search="business entrepreneur small business planning">
-      <div class="emoji">🏪</div>
-      <h3>Business Centre</h3>
-      <p>Explore business planning, customer service and entrepreneurship.</p>
-      <a href="#business">Explore Business →</a>
-    </article>
-
-    <article class="card" data-search="agriculture farming crops soil livestock maize">
-      <div class="emoji">🌱</div>
-      <h3>Agriculture</h3>
-      <p>Learn about soil, crops, livestock and basic farming practices.</p>
-      <a href="#farming">Explore Farming →</a>
-    </article>
-
-    <article class="card" data-search="Malawi facts districts tourism culture history lake">
-      <div class="emoji">🇲🇼</div>
-      <h3>About Malawi</h3>
-      <p>Discover general information about Malawi and its people.</p>
-      <a href="#about">Discover Malawi →</a>
-    </article>
-
-    <article class="card" data-search="quiz questions general knowledge learning">
-      <div class="emoji">🧠</div>
-      <h3>Knowledge Quiz</h3>
-      <p>Test your knowledge using our interactive quiz.</p>
-      <a href="#quiz">Take Quiz →</a>
-    </article>
-
-    <article class="card" data-search="technology computers internet digital skills">
-      <div class="emoji">💻</div>
-      <h3>Digital Skills</h3>
-      <p>Learn about the internet, computers and building websites.</p>
-      <a href="#digital">Explore Skills →</a>
-    </article>
-  </div>
-  <p id="searchMessage" aria-live="polite"></p>
+<section id="quiz" class="hidden">
+<div class="card">
+<div class="tag" id="quizCategory">CHALLENGE</div>
+<p class="muted" id="progress"></p>
+<div class="question" id="questionText"></div>
+<div id="options"></div>
+<div id="feedback" aria-live="polite"></div>
+<button id="nextButton" onclick="nextQuestion()" disabled>Next Question →</button>
+<button class="secondary" onclick="showPage('home')">Exit Quiz</button>
+</div>
 </section>
 
-<section id="education">
-  <h2>📚 Education Centre</h2>
-  <p class="subtitle">Resources to help students learn and practise.</p>
-  <div class="grid">
-    <article class="card">
-      <h3>Mathematics</h3>
-      <p>Practise algebra, equations, fractions and geometry.</p>
-    </article>
-    <article class="card">
-      <h3>Science</h3>
-      <p>Review introductory Chemistry, Biology, Physics and Agriculture.</p>
-    </article>
-    <article class="card">
-      <h3>Study Skills</h3>
-      <p>Build a study timetable, revise regularly and learn from mistakes.</p>
-    </article>
-  </div>
+<section id="results" class="hidden">
+<div class="card">
+<h2>Challenge Complete! 🎉</h2>
+<div class="stat" id="finalScore"></div>
+<p id="resultMessage"></p>
+<p class="muted">These are practice points, not a cash balance or guaranteed prize.</p>
+<button onclick="showPage('home')">Home</button>
+<button class="secondary" onclick="showPage('leaderboard')">Leaderboard</button>
+</div>
 </section>
 
-<section id="scholarships">
-  <h2>🎓 Scholarships & Further Education</h2>
-  <div class="card">
-    <p>
-      Before applying for a scholarship, check the eligibility requirements,
-      closing date, required documents and whether the announcement is genuine.
-    </p>
-    <a href="https://www.education.gov.mw/"
-       target="_blank" rel="noopener noreferrer">Check the Education Ministry website ↗</a>
-  </div>
+<section id="prizes" class="hidden">
+<div class="card">
+<h2>🏆 Daily Prize Pool</h2>
+<div class="stat">MK 5,000</div>
+<p class="muted">Proposed organizer-funded prizes for the top 10 verified winners.</p>
+<div id="prizeList"></div>
+<p class="notice">Free entry. No registration fee or deposit is required. Actual prize payments need funding, verification and published rules.</p>
+<button onclick="showPage('home')">Back Home</button>
+</div>
 </section>
 
-<section id="jobs">
-  <h2>💼 Jobs & Careers</h2>
-  <div class="grid">
-    <article class="card">
-      <h3>Official Announcements</h3>
-      <p>Start by checking official government and employer websites for current notices.</p>
-      <a href="https://www.malawi.gov.mw/"
-         target="_blank" rel="noopener noreferrer">Malawi Government ↗</a>
-    </article>
-    <article class="card">
-      <h3>Prepare for Work</h3>
-      <p>Learn to prepare a CV, practise interviews and develop useful skills.</p>
-    </article>
-    <article class="card">
-      <h3>Stay Safe</h3>
-      <p>Verify job offers carefully. A payment request does not guarantee employment.</p>
-    </article>
-  </div>
+<section id="leaderboard" class="hidden">
+<div class="card">
+<h2>🥇 Leaderboard</h2>
+<p class="muted">Demonstration scores saved on this device only.</p>
+<div id="fullBoard"></div>
+<button class="secondary" onclick="showPage('home')">Back Home</button>
+</div>
 </section>
-
-<section id="business">
-  <h2>🏪 Business Centre</h2>
-  <div class="grid">
-    <article class="card">
-      <h3>Business Ideas</h3>
-      <p>Identify a customer need, research costs and plan before starting a business.</p>
-    </article>
-    <article class="card">
-      <h3>Digital Business</h3>
-      <p>Explore websites, online marketing, customer service and record keeping.</p>
-    </article>
-    <article class="card">
-      <h3>Business Directory</h3>
-      <p>This section can later list verified businesses, their services and contact details.</p>
-    </article>
-  </div>
-</section>
-
-<section id="farming">
-  <h2>🌱 Agriculture & Farming</h2>
-  <div class="grid">
-    <article class="card">
-      <h3>Soil</h3>
-      <p>Soil contains mineral particles, organic matter, air and water. These influence plant growth.</p>
-    </article>
-    <article class="card">
-      <h3>Crop Production</h3>
-      <p>Learn about seed selection, planting, weeding, soil care and harvesting.</p>
-    </article>
-    <article class="card">
-      <h3>Livestock</h3>
-      <p>Livestock need suitable feed, clean water, shelter and appropriate animal care.</p>
-    </article>
-  </div>
-</section>
-
-<section id="about">
-  <h2>🇲🇼 About Malawi</h2>
-  <div class="card">
-    <p>
-      Malawi is a country in southeastern Africa. Its capital city is Lilongwe,
-      and Lake Malawi is one of its best-known natural features.
-    </p>
-    <p>
-      Malawi Hub can expand to include districts, tourism, culture, history
-      and information about public services.
-    </p>
-    <a href="https://www.malawi.gov.mw/"
-       target="_blank" rel="noopener noreferrer">Visit the Malawi Government website ↗</a>
-  </div>
-</section>
-
-<section id="digital">
-  <h2>💻 Digital Skills</h2>
-  <div class="grid">
-    <article class="card">
-      <h3>Internet Safety</h3>
-      <p>Use strong passwords, protect personal information and check whether websites are trustworthy.</p>
-    </article>
-    <article class="card">
-      <h3>Website Building</h3>
-      <p>HTML builds webpage structure, CSS controls appearance, and JavaScript adds interactions.</p>
-    </article>
-  </div>
-</section>
-
-<section id="quiz">
-  <h2>🧠 Malawi Hub Knowledge Quiz</h2>
-  <p class="subtitle">Answer five questions and check your score.</p>
-
-  <div class="quiz-box">
-    <p id="questionCount">Question 1 of 5</p>
-    <h3 id="questionText"></h3>
-    <div id="answers"></div>
-    <p id="quizResult" aria-live="polite"></p>
-    <button id="nextButton" type="button" class="hidden">Next Question</button>
-    <button id="restartButton" type="button" class="hidden">Play Again</button>
-  </div>
-</section>
-
-<section id="contact">
-  <h2>📩 Contact & Suggestions</h2>
-  <div class="card">
-    <p>
-      Have an idea for Malawi Hub? You can add a verified contact address
-      or a working feedback form here in a future update.
-    </p>
-    <p class="notice">
-      This starter website does not yet send messages, save accounts,
-      publish live job adverts or store quiz scores online.
-    </p>
-  </div>
-</section>
-
 </main>
 
 <footer>
-  <div class="container">
-    <strong>MALAWI HUB 🇲🇼</strong>
-    <p>Learning, information and opportunities for Malawi.</p>
-    <p class="small">A community information website project.</p>
-    <p>© <span id="year"></span> Malawi Hub</p>
-  </div>
-</footer>
-
-<script>
-"use strict";
-
-/* Search the service cards */
-const searchForm = document.getElementById("searchForm");
-const searchInput = document.getElementById("searchInput");
-const categoryCards = Array.from(
-  document.querySelectorAll("#categoryGrid .card")
-);
-const searchMessage = document.getElementById("searchMessage");
-
-searchForm.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  const term = searchInput.value.trim().toLowerCase();
-  let matches = 0;
-
-  categoryCards.forEach(function(card) {
-    const text = (
-      card.innerText + " " + (card.dataset.search || "")
-    ).toLowerCase();
-
-    const found = !term || text.includes(term);
-    card.classList.toggle("hidden", !found);
-
-    if (found) matches++;
-  });
-
-  searchMessage.textContent = term
-    ? matches + " matching section(s) found."
-    : "Showing all sections.";
-
-  document.getElementById("services").scrollIntoView({
-    behavior: "smooth"
-  });
-});
-
-/* Interactive quiz */
-const questions = [
-  {
-    question: "What is the capital city of Malawi?",
-    options: ["Blantyre", "Lilongwe", "Mzuzu", "Zomba"],
-    correct: 1
-  },
-  {
-    question: "Which lake is found along eastern Malawi?",
-    options: ["Lake Victoria", "Lake Chad", "Lake Malawi", "Lake Tanganyika"],
-    correct: 2
-  },
-  {
-    question: "Which gas do plants absorb during photosynthesis?",
-    options: ["Oxygen", "Carbon dioxide", "Hydrogen", "Helium"],
-    correct: 1
-  },
-  {
-    question: "What is 8 multiplied by 7?",
-    options: ["48", "54", "56", "64"],
-    correct: 2
-  },
-  {
-    question: "Which part of a plant usually absorbs water from soil?",
-    options: ["Flower", "Leaf", "Fruit", "Root"],
-    correct: 3
-  }
-];
-
-let currentQuestion = 0;
-let score = 0;
-let answered = false;
-
-const questionCount = document.getElementById("questionCount");
-const questionText = document.getElementById("questionText");
-const answersBox = document.getElementById("answers");
-const quizResult = document.getElementById("quizResult");
-const nextButton = document.getElementById("nextButton");
-const restartButton = document.getElementById("restartButton");
-
-function showQuestion() {
-  answered = false;
-
-  const item = questions[currentQuestion];
-
-  questionCount.textContent =
-    "Question " + (currentQuestion + 1) + " of " + questions.length;
-
-  questionText.textContent = item.question;
-  answersBox.innerHTML = "";
-  quizResult.textContent = "";
-
-  nextButton.classList.add("hidden");
-  restartButton.classList.add("hidden");
-
-  item.options.forEach(function(option, index) {
-    const button = document.createElement("button");
-
-    button.type = "button";
-    button.className = "answer";
-    button.textContent =
-      String.fromCharCode(65 + index) + ". " + option;
-
-    button.addEventListener("click", function() {
-      checkAnswer(index);
-    });
-
-    answersBox.appendChild(button);
-  });
-}
-
-function checkAnswer(selectedIndex) {
-  if (answered) return;
-  answered = true;
-
-  const item = questions[currentQuestion];
-  const buttons = answersBox.querySelectorAll("button");
-
-  if (selectedIndex === item.correct) {
-    score++;
-    quizResult.textContent = "Correct! Well done.";
-  } else {
-    quizResult.textContent =
-      "Not quite. The correct answer is " +
-      item.options[item.correct] + ".";
-  }
-
-  buttons.forEach(function(button, index) {
-    button.disabled = true;
-
-    if (index === item.correct) {
-      button.classList.add("correct");
-    } else if (index === selectedIndex) {
-      button.classList.add("incorrect");
-    }
-  });
-
-  nextButton.textContent =
-    currentQuestion === questions.length - 1
-      ? "See My Score"
-      : "Next Question";
-
-  nextButton.classList.remove("hidden");
-}
-
-nextButton.addEventListener("click", function() {
-  if (!answered) return;
-
-  if (currentQuestion < questions.length - 1) {
-    currentQuestion++;
-    showQuestion();
-    return;
-  }
-
-  questionCount.textContent = "Quiz completed!";
-  questionText.textContent = "Your final score";
-  answersBox.innerHTML = "";
-  quizResult.textContent =
-    "You scored " + score + " out of " + questions.length + ".";
-
-  nextButton.classList.add("hidden");
-  restartButton.classList.remove("hidden");
-});
-
-restartButton.addEventListener("click", function() {
-  currentQuestion = 0;
-  score = 0;
-  showQuestion();
-});
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-showQuestion();
-</script>
-</body>
-</html>
+<strong>MALAWI HUB 🇲🇼</strong>
+<p>Learn something new every day.</p>
+  </footer>
+  
