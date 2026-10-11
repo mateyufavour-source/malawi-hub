@@ -191,3 +191,393 @@ main{padding:11px}
 <p>Learn something new every day.</p>
   </footer>
   
+
+<script>
+"use strict";
+
+const WHATSAPP_NUMBER = "265885801081";
+
+const prizes = [
+  ["1st place", 1500],
+  ["2nd place", 1000],
+  ["3rd place", 700],
+  ["4th place", 500],
+  ["5th place", 400],
+  ["6th place", 300],
+  ["7th place", 200],
+  ["8th place", 150],
+  ["9th place", 150],
+  ["10th place", 100]
+];
+
+const questions = [
+  {
+    category:"malawi",
+    q:"In which year did Malawi gain independence?",
+    options:["1953","1964","1966","1994"],
+    answer:1,
+    explanation:"Malawi gained independence on 6 July 1964."
+  },
+  {
+    category:"school",
+    q:"Factorise x² − 7x + 12.",
+    options:["(x−3)(x−4)","(x+3)(x+4)","(x−2)(x−6)","(x+2)(x−6)"],
+    answer:0,
+    explanation:"−3 and −4 multiply to 12 and add to −7."
+  },
+  {
+    category:"science",
+    q:"Which gas is absorbed by plants during photosynthesis?",
+    options:["Oxygen","Hydrogen","Carbon dioxide","Nitrogen"],
+    answer:2,
+    explanation:"Plants use carbon dioxide, water and light to make food."
+  },
+  {
+    category:"school",
+    q:"Which soil particles are the smallest?",
+    options:["Sand","Gravel","Silt","Clay"],
+    answer:3,
+    explanation:"Clay particles are smaller than silt and sand particles."
+  },
+  {
+    category:"malawi",
+    q:"What is the capital city of Malawi?",
+    options:["Blantyre","Lilongwe","Mzuzu","Zomba"],
+    answer:1,
+    explanation:"Lilongwe is Malawi's capital city."
+  },
+  {
+    category:"science",
+    q:"Solve 2x² − 7x + 3 = 0.",
+    options:["x=3 or 1/2","x=2 or 3","x=−3 or −1/2","x=1 or 2"],
+    answer:0,
+    explanation:"(2x−1)(x−3)=0, so x=1/2 or x=3."
+  },
+  {
+    category:"school",
+    q:"What is the gradient of y = 5x − 2?",
+    options:["−2","2","5","−5"],
+    answer:2,
+    explanation:"In y=mx+c, the gradient is m, which is 5."
+  },
+  {
+    category:"science",
+    q:"What is the chemical symbol for potassium?",
+    options:["P","Pt","K","Po"],
+    answer:2,
+    explanation:"The chemical symbol for potassium is K."
+  },
+  {
+    category:"malawi",
+    q:"Which lake is the largest in Malawi?",
+    options:["Lake Chilwa","Lake Malawi","Lake Malombe","Lake Chiuta"],
+    answer:1,
+    explanation:"Lake Malawi is the country's largest lake."
+  },
+  {
+    category:"science",
+    q:"What is the approximate acceleration due to gravity near Earth's surface?",
+    options:["9.8 m/s²","98 m/s²","0.98 m/s²","980 m/s²"],
+    answer:0,
+    explanation:"The approximate value is 9.8 metres per second squared."
+  },
+  {
+    category:"school",
+    q:"Which method separates an insoluble solid from a liquid?",
+    options:["Evaporation","Filtration","Distillation","Condensation"],
+    answer:1,
+    explanation:"Filtration separates an insoluble solid from a liquid."
+  },
+  {
+    category:"malawi",
+    q:"Which ocean is nearest to Malawi?",
+    options:["Atlantic","Pacific","Indian","Arctic"],
+    answer:2,
+    explanation:"The Indian Ocean lies to the east of Malawi."
+  },
+  {
+    category:"science",
+    q:"A body travels 150 metres in 30 seconds. What is its average speed?",
+    options:["3 m/s","5 m/s","30 m/s","180 m/s"],
+    answer:1,
+    explanation:"Speed = distance ÷ time = 150 ÷ 30 = 5 m/s."
+  },
+  {
+    category:"school",
+    q:"What is the sum of the interior angles of a triangle?",
+    options:["90°","180°","270°","360°"],
+    answer:1,
+    explanation:"The interior angles of a triangle add up to 180°."
+  },
+  {
+    category:"science",
+    q:"Which blood cells mainly transport oxygen?",
+    options:["Red blood cells","White blood cells","Platelets","Plasma cells"],
+    answer:0,
+    explanation:"Red blood cells contain haemoglobin, which transports oxygen."
+  },
+  {
+    category:"school",
+    q:"Simplify 3(2x − 4) + 5x.",
+    options:["11x − 12","6x − 7","11x + 12","x − 12"],
+    answer:0,
+    explanation:"Expand to get 6x − 12 + 5x = 11x − 12."
+  },
+  {
+    category:"malawi",
+    q:"What is the currency of Malawi?",
+    options:["Kwacha","Rand","Shilling","Pula"],
+    answer:0,
+    explanation:"Malawi uses the Malawian kwacha (MWK)."
+  },
+  {
+    category:"science",
+    q:"Which part of a plant mainly absorbs water from the soil?",
+    options:["Flower petals","Root hairs","Fruit","Stem bark"],
+    answer:1,
+    explanation:"Root hairs provide a large surface area for water absorption."
+  }
+];
+
+let quizQuestions = [];
+let questionIndex = 0;
+let score = 0;
+let answered = false;
+let player = "Player";
+let category = "mixed";
+
+function readStorage(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value === null ? fallback : JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {}
+}
+
+function showPage(page) {
+  document.querySelectorAll("main section").forEach(section => {
+    section.classList.add("hidden");
+  });
+
+  const selected = document.getElementById(page);
+  if (selected) selected.classList.remove("hidden");
+
+  window.scrollTo({top:0, behavior:"smooth"});
+
+  if (page === "leaderboard") renderLeaderboard();
+}
+
+function addWhatsAppButtons() {
+  const home = document.getElementById("home");
+  const prizesSection = document.getElementById("prizes");
+
+  const homeButton = document.createElement("button");
+  homeButton.textContent = "💬 Prize Withdrawal / Enquiry";
+  homeButton.onclick = contactWhatsApp;
+
+  const homeCard = document.createElement("div");
+  homeCard.className = "card";
+  homeCard.innerHTML =
+    "<h2>Prize Support</h2>" +
+    "<p class='muted'>Contact the organizer about contest rules or a verified prize.</p>";
+  homeCard.appendChild(homeButton);
+  home.appendChild(homeCard);
+
+  const prizeButton = document.createElement("button");
+  prizeButton.textContent = "💬 Ask About Prize";
+  prizeButton.onclick = contactWhatsApp;
+  prizesSection.querySelector(".card").appendChild(prizeButton);
+}
+
+function contactWhatsApp() {
+  const message =
+    "Hello MALAWI HUB administrator. I would like to ask about a verified quiz prize. " +
+    "My display name is " +
+    (document.getElementById("playerName").value.trim() || "Not provided") +
+    ". Please explain the winner verification process.";
+
+  const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function renderPrizes() {
+  const target = document.getElementById("prizeList");
+
+  target.innerHTML = prizes.map((prize, index) =>
+    '<div class="prize-row"><span>' +
+    (index + 1) + ". " + prize[0] +
+    '</span><span class="gold">MK ' +
+    prize[1].toLocaleString() +
+    '</span></div>'
+  ).join("");
+
+  const total = prizes.reduce((sum, prize) => sum + prize[1], 0);
+
+  const totalLine = document.createElement("p");
+  totalLine.className = "gold";
+  totalLine.textContent = "Total prize budget: MK " + total.toLocaleString();
+  target.appendChild(totalLine);
+}
+
+function updateTotal() {
+  const scores = readStorage("malawiHubScores", []);
+  const total = scores.reduce((sum, item) => sum + item.score, 0);
+  document.getElementById("totalScore").textContent = total;
+}
+
+function startQuiz() {
+  player = document.getElementById("playerName").value.trim() || "Player";
+  category = document.getElementById("category").value;
+
+  let available = questions.filter(q =>
+    category === "mixed" || q.category === category
+  );
+
+  // Shuffle the question order for each practice attempt.
+  quizQuestions = [...available].sort(() => Math.random() - 0.5);
+  questionIndex = 0;
+  score = 0;
+  answered = false;
+
+  document.getElementById("quizCategory").textContent =
+    document.getElementById("category").selectedOptions[0].text;
+
+  showPage("quiz");
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (questionIndex >= quizQuestions.length) {
+    finishQuiz();
+    return;
+  }
+
+  answered = false;
+  const q = quizQuestions[questionIndex];
+
+  document.getElementById("progress").textContent =
+    "Question " + (questionIndex + 1) + " of " + quizQuestions.length;
+
+  document.getElementById("questionText").textContent = q.q;
+  document.getElementById("feedback").textContent = "";
+
+  const options = document.getElementById("options");
+  options.innerHTML = "";
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = String.fromCharCode(65 + index) + ". " + option;
+    button.onclick = () => chooseAnswer(index, button);
+    options.appendChild(button);
+  });
+
+  document.getElementById("nextButton").disabled = true;
+  document.getElementById("nextButton").textContent =
+    questionIndex === quizQuestions.length - 1 ? "Finish Quiz" : "Next Question →";
+}
+
+function chooseAnswer(index, chosenButton) {
+  if (answered) return;
+  answered = true;
+
+  const q = quizQuestions[questionIndex];
+  const buttons = document.querySelectorAll("#options button");
+
+  buttons.forEach((button, i) => {
+    button.disabled = true;
+    if (i === q.answer) button.classList.add("correct");
+  });
+
+  const feedback = document.getElementById("feedback");
+
+  if (index === q.answer) {
+    score++;
+    feedback.textContent = "Correct! +1 point. " + q.explanation;
+    feedback.style.color = "#00d084";
+  } else {
+    chosenButton.classList.add("wrong");
+    feedback.textContent = "Not quite. " + q.explanation;
+    feedback.style.color = "#ffd166";
+  }
+
+  document.getElementById("nextButton").disabled = false;
+}
+
+function nextQuestion() {
+  if (!answered) return;
+  questionIndex++;
+  renderQuestion();
+}
+
+function finishQuiz() {
+  const records = readStorage("malawiHubScores", []);
+
+  records.push({
+    name: player.slice(0, 20),
+    score: score,
+    date: new Date().toISOString()
+  });
+
+  records.sort((a, b) => b.score - a.score);
+  writeStorage("malawiHubScores", records.slice(0, 50));
+
+  document.getElementById("finalScore").textContent =
+    score + " / " + quizQuestions.length + " points";
+
+  document.getElementById("resultMessage").textContent =
+    "Well done, " + player + "! You answered " + score +
+    " questions correctly.";
+
+  updateTotal();
+  showPage("results");
+}
+
+function renderLeaderboard() {
+  const records = readStorage("malawiHubScores", []);
+  const sorted = [...records].sort((a, b) => b.score - a.score).slice(0, 10);
+
+  let html = "<table><thead><tr><th>Rank</th><th>Player</th><th>Points</th></tr></thead><tbody>";
+
+  if (sorted.length === 0) {
+    html += '<tr><td colspan="3">No practice scores yet. Play a quiz first!</td></tr>';
+  } else {
+    sorted.forEach((item, index) => {
+      html += "<tr><td>" + (index + 1) +
+        "</td><td>" + escapeHTML(item.name) +
+        "</td><td>" + item.score + "</td></tr>";
+    });
+  }
+
+  html += "</tbody></table>";
+
+  document.getElementById("previewBoard").innerHTML = html;
+  document.getElementById("fullBoard").innerHTML = html;
+}
+
+function escapeHTML(text) {
+  return String(text).replace(/[&<>"']/g, character => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[character]);
+}
+
+renderPrizes();
+updateTotal();
+renderLeaderboard();
+addWhatsAppButtons();
+</script>
+</body>
+</html>
