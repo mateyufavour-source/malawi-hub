@@ -417,4 +417,170 @@ renderLeaderboard();
 
 <a class="btn" href="https://whatsapp.com/channel/0029Vb8qApVG3R3dB4zaQa1p" target="_blank" rel="noopener">
   💚 Follow WhatsApp Channel for Tips
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MALAWI HUB Quiz</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  margin: 0;
+  padding: 18px;
+  color: #172033;
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  max-width: 500px;
+  margin: 15px auto;
+  box-shadow: 0 4px 15px #0002;
+}
+h2 { color: #087f5b; }
+#question { font-size: 19px; font-weight: bold; }
+button {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 9px 0;
+  border: 0;
+  border-radius: 9px;
+  background: #087f5b;
+  color: white;
+  font-size: 16px;
+}
+button:disabled { opacity: .65; }
+.bar-bg {
+  height: 14px;
+  background: #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+}
+#bar {
+  height: 100%;
+  width: 0%;
+  background: #16a34a;
+  transition: width .3s;
+}
+#percent { font-size: 28px; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>🇲🇼 MALAWI HUB</h2>
+  <p>Hard Challenge Quiz</p>
+  <p id="progress">Question 1</p>
+  <p id="question"></p>
+  <div id="options"></div>
+  <p id="feedback"></p>
+  <button id="next" onclick="nextQuestion()" hidden>
+    Next Question →
+  </button>
+</div>
+
+<div class="card">
+  <h2>Your Results</h2>
+  <p>Correct answers: <strong id="score">0</strong></p>
+  <p id="percent">0%</p>
+  <div class="bar-bg"><div id="bar"></div></div>
+  <p id="finished"></p>
+</div>
+
+<script>
+const questions = [
+ {q:"Which process converts atmospheric nitrogen into compounds plants can use?",o:["Transpiration","Nitrogen fixation","Photosynthesis","Respiration"],a:1},
+ {q:"What is the SI unit of electrical resistance?",o:["Volt","Ampere","Ohm","Watt"],a:2},
+ {q:"Solve: 2x² - 7x + 3 = 0. What are the roots?",o:["1 and 3","3 and 1/2","-3 and -1/2","2 and 3"],a:1},
+ {q:"Which organelle is the main site of aerobic respiration?",o:["Ribosome","Nucleus","Mitochondrion","Chloroplast"],a:2},
+ {q:"What is the pH of a neutral solution at 25°C?",o:["0","5","7","14"],a:2},
+ {q:"Which law states that pressure is inversely proportional to volume at constant temperature?",o:["Newton's law","Boyle's law","Ohm's law","Hooke's law"],a:1},
+ {q:"Which part of a plant absorbs most water from the soil?",o:["Flower petals","Root hairs","Stem bark","Leaf veins"],a:1},
+ {q:"What is the derivative of x² with respect to x?",o:["x","2x","x²","2"],a:1},
+ {q:"Which blood vessels carry blood away from the heart?",o:["Veins","Capillaries","Arteries","Venules"],a:2},
+ {q:"What is the chemical formula of calcium carbonate?",o:["CaCl₂","CaCO₃","CaO","CaSO₄"],a:1},
+ {q:"Which gas is released during photosynthesis?",o:["Nitrogen","Carbon dioxide","Oxygen","Hydrogen"],a:2},
+ {q:"What is the main function of red blood cells?",o:["Fight infection","Carry oxygen","Digest food","Make hormones"],a:1},
+ {q:"If a triangle has angles 45° and 65°, what is the third angle?",o:["60°","70°","80°","90°"],a:1},
+ {q:"Which layer of the Earth is liquid and surrounds the inner core?",o:["Crust","Mantle","Outer core","Lithosphere"],a:2},
+ {q:"What is the oxidation state of oxygen in most compounds?",o:["+2","-2","0","+1"],a:1}
+];
+
+let index = 0;
+let score = 0;
+let answered = false;
+
+function showQuestion() {
+  answered = false;
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("next").hidden = true;
+  document.getElementById("progress").textContent =
+    `Question ${index + 1} of ${questions.length}`;
+  document.getElementById("question").textContent =
+    questions[index].q;
+
+  const options = document.getElementById("options");
+  options.innerHTML = "";
+
+  questions[index].o.forEach((option, i) => {
+    const button = document.createElement("button");
+    button.textContent = String.fromCharCode(65 + i) + ". " + option;
+    button.onclick = () => checkAnswer(i, button);
+    options.appendChild(button);
+  });
+}
+
+function checkAnswer(choice, button) {
+  if (answered) return;
+  answered = true;
+
+  const correct = questions[index].a;
+  if (choice === correct) {
+    score++;
+    document.getElementById("feedback").textContent =
+      "✅ Correct!";
+  } else {
+    document.getElementById("feedback").textContent =
+      "❌ Incorrect. Correct answer: " +
+      questions[index].o[correct];
+  }
+
+  document.querySelectorAll("#options button").forEach(b => {
+    b.disabled = true;
+  });
+
+  updateScore();
+  document.getElementById("next").hidden = false;
+  document.getElementById("next").textContent =
+    index === questions.length - 1 ? "See Final Results" : "Next Question →";
+}
+
+function updateScore() {
+  const percent = Math.round(score / questions.length * 100);
+  document.getElementById("score").textContent =
+    score + "/" + questions.length;
+  document.getElementById("percent").textContent = percent + "%";
+  document.getElementById("bar").style.width = percent + "%";
+}
+
+function nextQuestion() {
+  if (index < questions.length - 1) {
+    index++;
+    showQuestion();
+  } else {
+    document.getElementById("question").textContent = "Quiz completed!";
+    document.getElementById("options").innerHTML = "";
+    document.getElementById("next").hidden = true;
+    document.getElementById("finished").textContent =
+      `Final score: ${score}/${questions.length} (${Math.round(score/questions.length*100)}%).`;
+  }
+}
+
+showQuestion();
+</script>
+</body>
+</html>
+
 </a>
