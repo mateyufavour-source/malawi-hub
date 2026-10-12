@@ -3,288 +3,182 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#063b2e">
-<title>MALAWI HUB - Hard Quiz</title>
-
+<title>MALAWI HUB | Quiz & Prizes</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#f0f5f3;color:#182923;
- font-family:Arial,sans-serif
-}
-header{
- background:#063b2e;color:white;padding:22px 15px;
- text-align:center
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f0f5f3;color:#182923}
+header{background:#063b2e;color:white;text-align:center;padding:22px 12px}
 header h1{margin:0;font-size:28px}
-header p{margin:8px 0 0}
-nav{
- display:flex;gap:8px;justify-content:center;flex-wrap:wrap;
- padding:12px;background:#fff
-}
-nav a{
- color:#075b43;text-decoration:none;font-weight:bold;
- padding:8px
-}
+nav{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;background:white;padding:13px}
+nav a{color:#087f5b;text-decoration:none;font-weight:bold}
 main{max-width:650px;margin:auto;padding:14px}
-.card{
- background:white;padding:18px;margin-bottom:15px;
- border-radius:15px;box-shadow:0 3px 12px #00000012
-}
-h2{margin-top:0;color:#075b43}
-button{
- border:0;border-radius:9px;padding:13px;
- font-size:15px;font-weight:bold;cursor:pointer
-}
-.primary{background:#087f5b;color:white;width:100%}
-.option{
- display:block;width:100%;text-align:left;
- margin:9px 0;background:#edf3f0;color:#183c30;
- border:2px solid transparent
-}
+.card{background:white;border-radius:15px;padding:18px;margin-bottom:15px;box-shadow:0 3px 12px #0001}
+h2{color:#087f5b;margin-top:0}
+button{border:0;border-radius:9px;padding:13px;font-size:15px;font-weight:bold;cursor:pointer}
+.primary{width:100%;background:#087f5b;color:white;margin-top:8px}
+.option{width:100%;display:block;text-align:left;margin:8px 0;background:#edf3f0;color:#183c30}
 .option:disabled{opacity:1}
-.option.correct{background:#d1fae5;border-color:#16a34a}
-.option.wrong{background:#fee2e2;border-color:#dc2626}
-.small{font-size:13px;color:#65736c}
+.option.correct{background:#d1fae5;border:2px solid #16a34a}
+.option.wrong{background:#fee2e2;border:2px solid #dc2626}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{
- background:#eff7f2;padding:12px 5px;text-align:center;
- border-radius:10px
-}
+.stat{background:#eff7f2;padding:12px 4px;text-align:center;border-radius:10px}
 .stat strong{display:block;font-size:20px;color:#087f5b}
+#percent{font-size:32px;font-weight:bold;color:#087f5b}
 .bar-bg{height:14px;background:#e5e7eb;border-radius:20px;overflow:hidden}
 #bar{height:100%;width:0;background:#16a34a;transition:width .3s}
-#percent{font-size:32px;font-weight:bold;color:#087f5b}
-#timer{font-size:24px;font-weight:bold}
-#timer.danger{color:#dc2626}
+#timer{font-size:23px;font-weight:bold}
 #question{font-size:18px;line-height:1.5}
-#name{width:100%;padding:13px;border:1px solid #ccd5cf;border-radius:9px;margin:8px 0}
+input{width:100%;padding:13px;border:1px solid #ccd5cf;border-radius:9px;margin:8px 0}
+.small{font-size:13px;color:#65736c;line-height:1.5}
 table{width:100%;border-collapse:collapse}
-th,td{padding:10px 5px;text-align:left;border-bottom:1px solid #e5e7eb}
+th,td{text-align:left;padding:10px 4px;border-bottom:1px solid #e5e7eb;overflow-wrap:anywhere}
 th{color:#087f5b}
-.whatsapp{display:block;text-align:center;text-decoration:none;
- background:#128c4a;color:white;padding:14px;border-radius:10px;font-weight:bold}
-footer{text-align:center;padding:20px;color:#66756d;font-size:13px}
+.whatsapp{display:block;text-align:center;text-decoration:none;background:#128c4a;color:white;padding:14px;border-radius:10px;font-weight:bold;margin-top:12px}
 [hidden]{display:none!important}
+footer{text-align:center;padding:20px;color:#65736c;font-size:13px}
 </style>
 </head>
-
 <body>
 <header>
- <h1>🇲🇼 MALAWI HUB</h1>
- <p>Learn More • Challenge Yourself • Rise to the Top</p>
+<h1>🇲🇼 MALAWI HUB</h1>
+<p>Learn • Challenge • Achieve</p>
 </header>
-
 <nav>
- <a href="#quiz">Play Quiz</a>
- <a href="#results">My Score</a>
- <a href="#leaderboard">Leaderboard</a>
+<a href="#quiz">Play Quiz</a>
+<a href="#results">My Score</a>
+<a href="#leaderboard">Leaderboard</a>
+<a href="#claim">Claim Prize</a>
 </nav>
-
-<section class="card" id="claim-prize">
-  <h2>🏆 Claim Your Prize</h2>
-  <p>Finished the quiz? Follow these steps to claim your prize.</p>
-
-  <ol>
-    <li>Finish your quiz and view your final percentage.</li>
-    <li>Take a screenshot showing your score.</li>
-    <li>Send your screenshot to the MALAWI HUB admin on WhatsApp.</li>
-    <li>Wait for the admin to verify your score and confirm your prize.</li>
-    <li>Follow our channel for prize announcements.</li>
-  </ol>
-
-  <div style="background:#eff7f2;padding:15px;border-radius:12px">
-    <p><strong>Your latest quiz result</strong></p>
-    <p>Player: <strong id="claimName">Player</strong></p>
-    <p>Correct answers: <strong id="claimScore">0/20</strong></p>
-    <p>Percentage: <strong id="claimPercent">0%</strong></p>
-  </div>
-
-  <button class="primary" onclick="shareQuizResult()">
-    📲 Send Score to WhatsApp Admin
-  </button>
-
-  <p class="small">
-    Sending your result does not guarantee a prize.
-    Prizes are subject to score verification and the published rules.
-  </p>
-
-  <a class="whatsapp"
-     href="https://whatsapp.com/channel/0029Vb8qApVG3R3dB4zaQa1p"
-     target="_blank" rel="noopener">
-     📢 Follow Channel for Prize Winners
-  </a>
-</section>
-
-<script>
-function shareQuizResult() {
-  ";const adminNumber = "265885801081";
-  const name = document.getElementById("name").value.trim() || "Player";
-  const scoreText = document.getElementById("finalScore").textContent;
-  const percent = document.getElementById("percent").textContent;
-
-  const message =
-    "MALAWI HUB - PRIZE CLAIM\n" +
-    "Player: " + name + "\n" +
-    "Score: " + scoreText + "\n" +
-    "Percentage: " + percent + "\n" +
-    "I would like my score verified for a prize.\n" +
-    "I will attach my quiz screenshot.";
-
-  const url = "https://wa.me/" + adminNumber +
-    "?text=" + encodeURIComponent(message);
-
-  if (adminNumber.includes("X")) {
-    alert("Please add the admin WhatsApp number in the code first.");
-    return;
-  }
-
-  document.getElementById("claimName").textContent = name;
-  document.getElementById("claimScore").textContent = scoreText;
-  document.getElementById("claimPercent").textContent = percent;
-
-  window.open(url, "_blank");
-}
-</script>
-
 <main>
 <section class="card">
- <h2>Welcome to the Hard Challenge!</h2>
- <p>Answer difficult questions and test your knowledge.</p>
- <div class="stats">
-  <div class="stat"><strong id="totalQ">20</strong><span>Questions</span></div>
-  <div class="stat"><strong>10s</strong><span>Per question</span></div>
-  <div class="stat"><strong id="topScore">0%</strong><span>Best score</span></div>
- </div>
- <label for="name"><strong>Your display name</strong></label>
- <input id="name" maxlength="24" placeholder="Enter your name">
- <p class="small">Use a nickname. Do not enter your password or private information.</p>
+<h2>Welcome to MALAWI HUB</h2>
+<p>Challenge yourself with difficult school and general knowledge questions.</p>
+<label for="player"><b>Your display name</b></label>
+<input id="player" maxlength="24" placeholder="Enter your nickname">
+<div class="stats">
+<div class="stat"><strong>20</strong>Questions</div>
+<div class="stat"><strong>10s</strong>Per question</div>
+<div class="stat"><strong id="best">0%</strong>Best score</div>
+</div>
 </section>
 
 <section class="card" id="quiz">
- <h2>🧠 Hard Quiz</h2>
- <div class="stats">
-  <div class="stat"><strong id="questionCount">0/20</strong><span>Progress</span></div>
-  <div class="stat"><strong id="liveCorrect">0</strong><span>Correct</span></div>
-  <div class="stat"><strong id="timer">10</strong><span>Seconds left</span></div>
- </div>
- <p id="question">Press Start Quiz to begin.</p>
- <div id="options"></div>
- <p id="feedback" aria-live="polite"></p>
- <button id="start" class="primary" onclick="startQuiz()">Start Quiz</button>
- <button id="next" class="primary" onclick="nextQuestion()" hidden>Next Question →</button>
+<h2>🧠 Hard Challenge</h2>
+<div class="stats">
+<div class="stat"><strong id="progress">0/20</strong>Progress</div>
+<div class="stat"><strong id="correct">0</strong>Correct</div>
+<div class="stat"><strong id="timer">10</strong>Seconds</div>
+</div>
+<p id="question">Press Start Quiz to begin.</p>
+<div id="options"></div>
+<p id="feedback" aria-live="polite"></p>
+<button class="primary" id="start" onclick="startQuiz()">Start Quiz</button>
+<button class="primary" id="next" onclick="nextQuestion()" hidden>Next Question</button>
 </section>
 
 <section class="card" id="results">
- <h2>📊 Your Percentage Score</h2>
- <div id="percent">0%</div>
- <div class="bar-bg"><div id="bar"></div></div>
- <p>Correct answers: <strong id="finalScore">0/20</strong></p>
- <p id="resultMessage">Complete the quiz to see your results.</p>
- <button class="primary" onclick="startQuiz()">Play Again</button>
+<h2>📊 Your Percentage Score</h2>
+<div id="percent">0%</div>
+<div class="bar-bg"><div id="bar"></div></div>
+<p>Correct answers: <b id="finalScore">0/20</b></p>
+<p id="resultMessage">Complete the quiz to see your result.</p>
 </section>
 
 <section class="card" id="leaderboard">
- <h2>🏆 Leaderboard</h2>
- <p class="small">Scores saved on this device only. They are not yet shared with other players.</p>
- <table>
-  <thead><tr><th>Rank</th><th>Player</th><th>Score</th><th>%</th></tr></thead>
-  <tbody id="leaderRows">
-   <tr><td colspan="4">Complete a quiz to appear here.</td></tr>
-  </tbody>
- </table>
- <button class="primary" onclick="renderLeaderboard()">Refresh Leaderboard</button>
+<h2>🏆 Leaderboard</h2>
+<p class="small">This version saves scores on the current device. A shared live leaderboard requires Firebase.</p>
+<table>
+<thead><tr><th>Rank</th><th>Player</th><th>Score</th><th>%</th></tr></thead>
+<tbody id="leaderRows"></tbody>
+</table>
+<button class="primary" onclick="renderLeaderboard()">Refresh Leaderboard</button>
 </section>
 
-<section class="card">
- <h2>📲 Get More Tips</h2>
- <p>Follow the MALAWI HUB WhatsApp channel for updates and tips.</p>
- <a class="whatsapp"
- href="https://whatsapp.com/channel/0029Vb8qApVG3R3dB4zaQa1p"
- target="_blank" rel="noopener">Follow WhatsApp Channel</a>
+<section class="card" id="claim">
+<h2>🎁 Claim Your Prize</h2>
+<p>Finish your quiz, take a screenshot of your result, and send it to the admin for verification.</p>
+<div style="background:#eff7f2;padding:13px;border-radius:10px">
+<p>Player: <b id="claimName">Player</b></p>
+<p>Score: <b id="claimScore">0/20</b></p>
+<p>Percentage: <b id="claimPercent">0%</b></p>
+</div>
+<button class="primary" onclick="shareQuizResult()">📲 Send Score to WhatsApp Admin</button>
+<p class="small">After WhatsApp opens, attach your screenshot manually and send it. A prize is not guaranteed until the admin verifies your result and confirms the published prize rules.</p>
+<a class="whatsapp" href="https://whatsapp.com/channel/0029Vb8qApVG3R3dB4zaQa1p" target="_blank" rel="noopener">📢 Follow Channel for Prize Winners</a>
 </section>
 </main>
-
-<footer>© 2026 MALAWI HUB • Keep learning every day.</footer>
+<footer>© 2026 MALAWI HUB</footer>
 
 <script>
-const questions = [
- {q:"Solve 2x² - 7x + 3 = 0.",o:["x = 1 or 3","x = 3 or 1/2","x = -3 or -1/2","x = 2 or 3"],a:1},
- {q:"Which law relates pressure and volume at constant temperature?",o:["Boyle's law","Ohm's law","Newton's law","Faraday's law"],a:0},
- {q:"What is the derivative of x³?",o:["x²","2x","3x²","3x"],a:2},
- {q:"Which organelle is the main site of aerobic respiration?",o:["Ribosome","Mitochondrion","Nucleus","Vacuole"],a:1},
- {q:"What is the pH of a neutral solution at 25°C?",o:["0","5","7","14"],a:2},
- {q:"Which process converts atmospheric nitrogen into usable compounds?",o:["Evaporation","Nitrogen fixation","Transpiration","Condensation"],a:1},
- {q:"What is the chemical formula of calcium carbonate?",o:["CaCl₂","CaCO₃","CaO","CaSO₄"],a:1},
- {q:"A car travels 150 km in 3 hours. What is its average speed?",o:["30 km/h","45 km/h","50 km/h","60 km/h"],a:2},
- {q:"Which blood vessels carry blood away from the heart?",o:["Veins","Capillaries","Arteries","Venules"],a:2},
- {q:"Which gas is released during photosynthesis?",o:["Nitrogen","Oxygen","Carbon dioxide","Hydrogen"],a:1},
- {q:"What is the sum of the interior angles of a hexagon?",o:["360°","540°","720°","900°"],a:2},
- {q:"Which layer surrounds Earth's inner core?",o:["Crust","Mantle","Outer core","Lithosphere"],a:2},
- {q:"What is the oxidation state of oxygen in most compounds?",o:["+2","-2","0","+1"],a:1},
- {q:"If 3x + 5 = 20, what is x?",o:["3","5","7","15"],a:1},
- {q:"Which cell structure controls the movement of substances into and out of a cell?",o:["Cell membrane","Nucleus","Ribosome","Chromosome"],a:0},
- {q:"Which soil particle is the smallest among sand, silt and clay?",o:["Sand","Gravel","Silt","Clay"],a:3},
- {q:"Which instrument measures electric current?",o:["Voltmeter","Ammeter","Barometer","Thermometer"],a:1},
- {q:"What is the probability of getting a 6 on a fair six-sided die?",o:["1/2","1/3","1/6","5/6"],a:2},
- {q:"Which economic term describes a general rise in prices?",o:["Deflation","Inflation","Depreciation","Subsidy"],a:1},
- {q:"What is the capital city of Malawi?",o:["Blantyre","Mzuzu","Lilongwe","Zomba"],a:2}
+const questions=[
+{q:"Solve 2x² - 7x + 3 = 0.",o:["x = 1 or 3","x = 3 or 1/2","x = -3 or -1/2","x = 2 or 3"],a:1},
+{q:"Which law relates pressure and volume at constant temperature?",o:["Boyle's law","Ohm's law","Newton's law","Faraday's law"],a:0},
+{q:"What is the derivative of x³?",o:["x²","2x","3x²","3x"],a:2},
+{q:"Which organelle is the main site of aerobic respiration?",o:["Ribosome","Mitochondrion","Nucleus","Vacuole"],a:1},
+{q:"What is the pH of a neutral solution at 25°C?",o:["0","5","7","14"],a:2},
+{q:"Which process converts atmospheric nitrogen into usable compounds?",o:["Evaporation","Nitrogen fixation","Transpiration","Condensation"],a:1},
+{q:"What is the chemical formula of calcium carbonate?",o:["CaCl₂","CaCO₃","CaO","CaSO₄"],a:1},
+{q:"A car travels 150 km in 3 hours. What is its average speed?",o:["30 km/h","45 km/h","50 km/h","60 km/h"],a:2},
+{q:"Which blood vessels carry blood away from the heart?",o:["Veins","Capillaries","Arteries","Venules"],a:2},
+{q:"Which gas is released during photosynthesis?",o:["Nitrogen","Oxygen","Carbon dioxide","Hydrogen"],a:1},
+{q:"What is the sum of a hexagon's interior angles?",o:["360°","540°","720°","900°"],a:2},
+{q:"Which layer surrounds Earth's inner core?",o:["Crust","Mantle","Outer core","Lithosphere"],a:2},
+{q:"What is the oxidation state of oxygen in most compounds?",o:["+2","-2","0","+1"],a:1},
+{q:"If 3x + 5 = 20, what is x?",o:["3","5","7","15"],a:1},
+{q:"Which structure controls substances entering and leaving a cell?",o:["Cell membrane","Nucleus","Ribosome","Chromosome"],a:0},
+{q:"Which is the smallest soil particle?",o:["Sand","Gravel","Silt","Clay"],a:3},
+{q:"Which instrument measures electric current?",o:["Voltmeter","Ammeter","Barometer","Thermometer"],a:1},
+{q:"What is the probability of rolling a 6 on a fair six-sided die?",o:["1/2","1/3","1/6","5/6"],a:2},
+{q:"What is a general rise in prices called?",o:["Deflation","Inflation","Depreciation","Subsidy"],a:1},
+{q:"What is the capital city of Malawi?",o:["Blantyre","Mzuzu","Lilongwe","Zomba"],a:2}
 ];
 
-let order=[], index=0, score=0, timerId=null, seconds=10;
-let answered=false, running=false;
-const $ = id => document.getElementById(id);
+let order=[],index=0,score=0,seconds=10,timerId=null,answered=false,running=false;
+const $=id=>document.getElementById(id);
 
-function readSaved(key, fallback) {
- try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
- catch { return fallback; }
+function readSaved(key,fallback){
+ try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}
 }
-function save(key, value) {
- try { localStorage.setItem(key, JSON.stringify(value)); }
- catch {}
+function save(key,value){
+ try{localStorage.setItem(key,JSON.stringify(value))}catch{}
 }
-function safeName(value) {
- return value.trim().replace(/[<>]/g,"").slice(0,24) || "Player";
-}
-function shuffle(array) {
- for(let i=array.length-1;i>0;i--){
+function shuffle(arr){
+ for(let i=arr.length-1;i>0;i--){
   const j=Math.floor(Math.random()*(i+1));
-  [array[i],array[j]]=[array[j],array[i]];
+  [arr[i],arr[j]]=[arr[j],arr[i]];
  }
- return array;
+ return arr;
 }
-
+function safeName(){
+ return $("player").value.trim().replace(/[<>]/g,"").slice(0,24)||"Player";
+}
 function startQuiz(){
  clearInterval(timerId);
  order=shuffle([...Array(questions.length).keys()]);
- index=0; score=0; running=true; answered=false;
+ index=0;score=0;running=true;answered=false;
  $("start").hidden=true;
- $("next").hidden=true;
- $("liveCorrect").textContent="0";
- $("finalScore").textContent="0/"+questions.length;
+ $("correct").textContent="0";
  $("percent").textContent="0%";
  $("bar").style.width="0%";
- $("resultMessage").textContent="Quiz in progress...";
- $("feedback").textContent="";
+ $("finalScore").textContent="0/20";
+ $("resultMessage").textContent="Quiz in progress.";
  showQuestion();
 }
-
 function showQuestion(){
- if(!running) return;
- answered=false; seconds=10;
+ answered=false;seconds=10;
  const item=questions[order[index]];
- $("questionCount").textContent=(index+1)+"/"+questions.length;
+ $("progress").textContent=(index+1)+"/"+questions.length;
  $("timer").textContent=seconds;
- $("timer").classList.remove("danger");
  $("question").textContent=item.q;
  $("feedback").textContent="";
  $("next").hidden=true;
  $("options").innerHTML="";
- item.o.forEach((text,i)=>{
+ item.o.forEach((option,i)=>{
   const b=document.createElement("button");
   b.className="option";
-  b.textContent=String.fromCharCode(65+i)+". "+text;
+  b.textContent=String.fromCharCode(65+i)+". "+option;
   b.onclick=()=>answer(i,b);
   $("options").appendChild(b);
  });
@@ -292,32 +186,29 @@ function showQuestion(){
  timerId=setInterval(()=>{
   seconds--;
   $("timer").textContent=seconds;
-  if(seconds<=3) $("timer").classList.add("danger");
   if(seconds<=0){
    clearInterval(timerId);
    answer(-1,null);
   }
  },1000);
 }
-
 function answer(choice,button){
- if(answered || !running) return;
- answered=true;
- clearInterval(timerId);
+ if(answered||!running)return;
+ answered=true;clearInterval(timerId);
  const item=questions[order[index]];
  const buttons=$("options").querySelectorAll("button");
  buttons.forEach(b=>b.disabled=true);
  if(choice===item.a){
   score++;
-  $("feedback").textContent="✅ Correct answer!";
- } else {
+  $("feedback").textContent="✅ Correct!";
+ }else{
   $("feedback").textContent=choice===-1
-   ?"⏰ Time is up! Correct answer: "+item.o[item.a]
-   :"❌ Correct answer: "+item.o[item.a];
+  ?"⏰ Time is up! Answer: "+item.o[item.a]
+  :"❌ Correct answer: "+item.o[item.a];
  }
- if(buttons[item.a]) buttons[item.a].classList.add("correct");
- if(button && choice!==item.a) button.classList.add("wrong");
- $("liveCorrect").textContent=score;
+ if(buttons[item.a])buttons[item.a].classList.add("correct");
+ if(button&&choice!==item.a)button.classList.add("wrong");
+ $("correct").textContent=score;
  const pct=Math.round(score/questions.length*100);
  $("percent").textContent=pct+"%";
  $("bar").style.width=pct+"%";
@@ -325,58 +216,67 @@ function answer(choice,button){
  $("next").hidden=false;
  $("next").textContent=index===questions.length-1?"Finish Quiz":"Next Question →";
 }
-
 function nextQuestion(){
- if(!answered) return;
- if(index<questions.length-1){
-  index++;
-  showQuestion();
- } else finishQuiz();
+ if(!answered)return;
+ if(index<questions.length-1){index++;showQuestion()}
+ else finishQuiz();
 }
-
 function finishQuiz(){
- clearInterval(timerId);
- running=false;
+ clearInterval(timerId);running=false;
+ const pct=Math.round(score/questions.length*100);
+ const name=safeName();
  $("question").textContent="🎉 Quiz completed!";
  $("options").innerHTML="";
  $("next").hidden=true;
  $("timer").textContent="0";
- const pct=Math.round(score/questions.length*100);
  $("percent").textContent=pct+"%";
  $("bar").style.width=pct+"%";
  $("finalScore").textContent=score+"/"+questions.length;
- $("resultMessage").textContent=
-  pct>=80?"Excellent work!":pct>=50?"Good effort! Keep practising.":"Keep learning and try again!";
- const name=safeName($("name").value);
+ $("resultMessage").textContent=pct>=80?"Excellent work!":pct>=50?"Good effort! Keep practising.":"Keep learning and try again!";
+ $("claimName").textContent=name;
+ $("claimScore").textContent=score+"/"+questions.length;
+ $("claimPercent").textContent=pct+"%";
  let records=readSaved("malawiHubScores",[]);
  records.push({name,score,total:questions.length,pct,date:Date.now()});
- records.sort((a,b)=>b.pct-a.pct || b.score-a.score || a.date-b.date);
+ records.sort((a,b)=>b.pct-a.pct||b.score-a.score||a.date-b.date);
  save("malawiHubScores",records.slice(0,50));
+ const best=Math.max(pct,readSaved("malawiHubBest",0));
+ save("malawiHubBest",best);
+ $("best").textContent=best+"%";
  renderLeaderboard();
- const best=readSaved("malawiHubBest",0);
- if(pct>best){save("malawiHubBest",pct);$("topScore").textContent=pct+"%";}
 }
-
 function renderLeaderboard(){
  const records=readSaved("malawiHubScores",[]);
- const body=$("leaderRows");
- body.innerHTML="";
+ const body=$("leaderRows");body.innerHTML="";
  if(!records.length){
-  body.innerHTML='<tr><td colspan="4">No scores yet. Play the quiz!</td></tr>';
-  return;
+  body.innerHTML='<tr><td colspan="4">Play the quiz to appear here.</td></tr>';return;
  }
  records.slice(0,10).forEach((r,i)=>{
   const tr=document.createElement("tr");
   [i+1,r.name,r.score+"/"+r.total,r.pct+"%"].forEach(v=>{
-   const td=document.createElement("td");
-   td.textContent=v;
-   tr.appendChild(td);
+   const td=document.createElement("td");td.textContent=v;tr.appendChild(td);
   });
   body.appendChild(tr);
  });
 }
-$("totalQ").textContent=questions.length;
-$("topScore").textContent=readSaved("malawiHubBest",0)+"%";
+function shareQuizResult(){
+ const adminNumber="265885801081";
+ const name=safeName();
+ const scoreText=$("finalScore").textContent;
+ const percent=$("percent").textContent;
+ if(!running&&scoreText==="0/20"){
+  alert("Please finish the quiz before claiming a prize.");
+  return;
+ }
+ const message="MALAWI HUB PRIZE CLAIM\n"+
+ "Player: "+name+"\n"+
+ "Score: "+scoreText+"\n"+
+ "Percentage: "+percent+"\n\n"+
+ "Please verify my quiz result. I will attach my screenshot.";
+ const url="https://wa.me/"+adminNumber+"?text="+encodeURIComponent(message);
+ window.location.href=url;
+}
+$("best").textContent=readSaved("malawiHubBest",0)+"%";
 renderLeaderboard();
 </script>
 </body>
