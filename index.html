@@ -82,6 +82,72 @@ footer{text-align:center;padding:20px;color:#66756d;font-size:13px}
  <a href="#leaderboard">Leaderboard</a>
 </nav>
 
+<section class="card" id="claim-prize">
+  <h2>🏆 Claim Your Prize</h2>
+  <p>Finished the quiz? Follow these steps to claim your prize.</p>
+
+  <ol>
+    <li>Finish your quiz and view your final percentage.</li>
+    <li>Take a screenshot showing your score.</li>
+    <li>Send your screenshot to the MALAWI HUB admin on WhatsApp.</li>
+    <li>Wait for the admin to verify your score and confirm your prize.</li>
+    <li>Follow our channel for prize announcements.</li>
+  </ol>
+
+  <div style="background:#eff7f2;padding:15px;border-radius:12px">
+    <p><strong>Your latest quiz result</strong></p>
+    <p>Player: <strong id="claimName">Player</strong></p>
+    <p>Correct answers: <strong id="claimScore">0/20</strong></p>
+    <p>Percentage: <strong id="claimPercent">0%</strong></p>
+  </div>
+
+  <button class="primary" onclick="shareQuizResult()">
+    📲 Send Score to WhatsApp Admin
+  </button>
+
+  <p class="small">
+    Sending your result does not guarantee a prize.
+    Prizes are subject to score verification and the published rules.
+  </p>
+
+  <a class="whatsapp"
+     href="https://whatsapp.com/channel/0029Vb8qApVG3R3dB4zaQa1p"
+     target="_blank" rel="noopener">
+     📢 Follow Channel for Prize Winners
+  </a>
+</section>
+
+<script>
+function shareQuizResult() {
+  const adminNumber = "265XXXXXXXXX";
+  const name = document.getElementById("name").value.trim() || "Player";
+  const scoreText = document.getElementById("finalScore").textContent;
+  const percent = document.getElementById("percent").textContent;
+
+  const message =
+    "MALAWI HUB - PRIZE CLAIM\n" +
+    "Player: " + name + "\n" +
+    "Score: " + scoreText + "\n" +
+    "Percentage: " + percent + "\n" +
+    "I would like my score verified for a prize.\n" +
+    "I will attach my quiz screenshot.";
+
+  const url = "https://wa.me/" + adminNumber +
+    "?text=" + encodeURIComponent(message);
+
+  if (adminNumber.includes("X")) {
+    alert("Please add the admin WhatsApp number in the code first.");
+    return;
+  }
+
+  document.getElementById("claimName").textContent = name;
+  document.getElementById("claimScore").textContent = scoreText;
+  document.getElementById("claimPercent").textContent = percent;
+
+  window.open(url, "_blank");
+}
+</script>
+
 <main>
 <section class="card">
  <h2>Welcome to the Hard Challenge!</h2>
